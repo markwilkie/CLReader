@@ -51,7 +51,8 @@ public class Matches
     public void DumpItems()
     {
         //Open file
-        FileStream fileHandle = new FileStream ("SearchResults.html", FileMode.CreateNew, FileAccess.Write);
+        string outputPath=Path.Combine("wwwroot","SearchResults.html");
+        FileStream fileHandle = new FileStream (outputPath, FileMode.CreateNew, FileAccess.Write);
         StreamWriter htmlStream = new StreamWriter(fileHandle);
         htmlStream.AutoFlush = true;
 
