@@ -52,7 +52,7 @@ public class Matches
     {
         //Open file
         string outputPath=Path.Combine("wwwroot","SearchResults.html");
-        FileStream fileHandle = new FileStream (outputPath, FileMode.CreateNew, FileAccess.Write);
+        FileStream fileHandle = new FileStream (outputPath, FileMode.Create, FileAccess.Write);
         StreamWriter htmlStream = new StreamWriter(fileHandle);
         htmlStream.AutoFlush = true;
 
