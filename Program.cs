@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 
 namespace CLReader
@@ -12,6 +13,9 @@ namespace CLReader
         static Matches matches;
         static void Main(string[] args)
         {
+            //Start up web server to server resulting html files
+            StartWebServer();
+
             //Loop forever
             while(true)
             {
@@ -50,6 +54,18 @@ namespace CLReader
                 TimeSpan timeToWait = new TimeSpan(hoursToWait,0,0);
                 Thread.Sleep(timeToWait);
             }
+        }
+
+        static void StartWebServer()
+        {
+            Console.WriteLine($"{DateTime.Now}: Starting Kestrel...");
+            var webHostBuilder = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseKestrel()
+                .UseStartup<Startup>()
+                .UseUrls("http://*:5001");
+            var host = webHostBuilder.Build();
+            host.Start();
         }
 
         static void Search(SearchTerm st,string cityList,string clDomain)
