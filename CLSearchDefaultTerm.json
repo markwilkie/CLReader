@@ -1,0 +1,10 @@
+{
+  "MinPrice": 14000,
+  "MaxPrice": 51110,
+  "MinYear": 2001,
+  "MaxYear": 3000,
+  "CLSearch": null,
+  "ExcludeKeywords": "5th,keystone,trailer,slide,b+,b +,b plus,rialta,coach,navion,f250,f-250,f-350,f-450,xlt,silverado,lariat,coachmen,class c,class a,box,cube,widebody,extended cab,weekender,passenger van",
+  "USCities": "atlanta,austin,boston,chicago,dallas,denver,detroit,houston,lasvegas,losangeles,miami,minneapolis,newyork,orangecounty,philadelphia,phoenix,portland,raleigh,sacramento,sandiego,seattle,sfbay,washingtondc",
+  "CACities": "vancouver,victoria"
+}
