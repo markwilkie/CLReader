@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -11,32 +12,44 @@ namespace CLReader
         static Matches matches;
         static void Main(string[] args)
         {
-            //Dictionary to hold all matches (key is title)
-            matches = new Matches();
-
-            //Read json with search term list (but first get default)
-            SearchTerm defaultSearchTerm = JsonConvert.DeserializeObject<SearchTerm>(File.ReadAllText("CLSearchDefaultTerm.json"));
-            List<SearchTerm> searchTermList = JsonConvert.DeserializeObject<List<SearchTerm>>(File.ReadAllText("CLSearchTerms.json"));
-
-            Console.WriteLine($"Search current as of {DateTime.Now}");
-
-            //Loop through and search
-            foreach(SearchTerm st in searchTermList)
+            //Loop forever
+            while(true)
             {
-                //Load empty slots w/ default search term
-                st.SetDefaults(defaultSearchTerm);
+                //Dictionary to hold all matches (key is title)
+                matches = new Matches();
 
-                Console.WriteLine($"Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.CLSearch}<br>");
+                //Read json with search term list (but first get default)
+                SearchTerm defaultSearchTerm = JsonConvert.DeserializeObject<SearchTerm>(File.ReadAllText("CLSearchDefaultTerm.json"));
+                List<SearchTerm> searchTermList = JsonConvert.DeserializeObject<List<SearchTerm>>(File.ReadAllText("CLSearchTerms.json"));
 
-                //Search all US and CA cities asked for
-                if(st.USCities != null && st.USCities.Length>0)
-                    Search(st,st.USCities,".org");
-                if(st.CACities != null && st.CACities.Length>0)
-                    Search(st,st.CACities,".ca");
+                Console.WriteLine($"{DateTime.Now}: Woke up and am searching again...");
+
+                //Loop through and search
+                foreach(SearchTerm st in searchTermList)
+                {
+                    //Load empty slots w/ default search term
+                    st.SetDefaults(defaultSearchTerm);
+
+                    Console.WriteLine($"Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.CLSearch}");
+
+                    //Search all US and CA cities asked for
+                    if(st.USCities != null && st.USCities.Length>0)
+                        Search(st,st.USCities,".org");
+                    if(st.CACities != null && st.CACities.Length>0)
+                        Search(st,st.CACities,".ca");
+                }
+                
+                //dump
+                matches.DumpItems();
+
+                //wait for 3 hours during the day
+                int hoursToWait = 3;
+                if(DateTime.Now.Hour >= 21)
+                    hoursToWait = 9;
+                Console.WriteLine($"{DateTime.Now}: Waiting {hoursToWait} hours....");
+                TimeSpan timeToWait = new TimeSpan(hoursToWait,0,0);
+                Thread.Sleep(timeToWait);
             }
-            
-            //dump
-            matches.DumpItems();
         }
 
         static void Search(SearchTerm st,string cityList,string clDomain)

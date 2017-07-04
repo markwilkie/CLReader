@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 public class Matches
@@ -49,11 +50,21 @@ public class Matches
 
     public void DumpItems()
     {
-        Console.WriteLine("<p>============<p>");
+        //Open file
+        FileStream fileHandle = new FileStream ("SearchResults.html", FileMode.CreateNew, FileAccess.Write);
+        StreamWriter htmlStream = new StreamWriter(fileHandle);
+        htmlStream.AutoFlush = true;
+
+        htmlStream.WriteLine($"Search current as of {DateTime.Now}<p>");
+
         List<Item> itemList = GetSortedItems();
         foreach(Item item in itemList)
         {
-            Console.WriteLine($"{item.PublishDate} - <a href={item.Link}>{item.Title}</a><br>");
+            htmlStream.WriteLine($"{item.PublishDate} - <a href={item.Link}>{item.Title}</a><br>");
         }
+
+        //Close up file
+        fileHandle.Close();
+
     }
 }
