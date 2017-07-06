@@ -61,7 +61,7 @@ public class Matches
         List<Item> itemList = GetSortedItems();
         foreach(Item item in itemList)
         {
-            string starred=" ";
+            string starred=" ";
             if(item.Starred)
                 starred = "*";
 

@@ -79,16 +79,9 @@ namespace CLReader
                 var items = parser.Parse(clURL,FeedType.RDF);
                 foreach(Item item in items)
                 {
-                    //Check for title exclude keywords
-                    bool excludeFlag = true;
-                    foreach(string exclKey in st.ExcludeKeywords.Split(',').ToList())
-                    {
-                        if(exclKey.Length > 1 && item.Title.ToLower().Contains(exclKey.ToLower()))
-                        {
-                            excludeFlag=false;
-                            break;
-                        }
-                    }
+                    //Check for title exclude keywords and chars
+                    bool excludeKeywordsFlag = CheckTitle(st.ExcludeKeywords+" ",item.Title);
+                    bool excludeCharsFlag = CheckTitle(st.ExcludeChars,item.Title);
 
                     //Get and check year (if it can parse)
                     bool yearFlag = false;
@@ -99,11 +92,11 @@ namespace CLReader
                     //Get and check price (zero if can't parse)
                     bool priceFlag = false;
                     long price = GetPrice(item.Title);
-                    if((price == 0 || price >= st.MinPrice) && price <= st.MaxPrice)
+                    if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
                         priceFlag=true;
 
                     //If we're still ok
-                    if(excludeFlag && yearFlag && priceFlag)
+                    if(excludeKeywordsFlag && excludeCharsFlag && yearFlag && priceFlag)
                     {
                         //Update item
                         item.Starred = st.Starred;
@@ -116,6 +109,21 @@ namespace CLReader
                     }
                 }
             }
+        }
+
+        static bool CheckTitle(string excludeString,string title)
+        {
+            bool excludeFlag = true;
+            foreach(string exclKey in excludeString.Split(',').ToList())
+            {
+                if(exclKey.Length > 1 && title.ToLower().Contains(exclKey.ToLower()))
+                {
+                    excludeFlag=false;
+                    break;
+                }
+            }     
+
+            return excludeFlag;       
         }
 
         static long GetYear(string title)

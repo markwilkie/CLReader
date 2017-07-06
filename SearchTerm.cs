@@ -5,10 +5,12 @@ public class SearchTerm
     public bool Starred { get; set; }
     public long MinPrice { get; set; }
     public long MaxPrice { get; set; }
+    public bool IgnoreZeroPrice { get; set; }    
     public long MinYear { get; set; }
     public long MaxYear { get; set; }
     public string CLSearch { get; set; }
     public string ExcludeKeywords { get; set; }
+    public string ExcludeChars { get; set; }    
     public string USCities { get; set; }
     public string CACities { get; set; }
 
@@ -32,6 +34,8 @@ public class SearchTerm
             MaxYear=defaultSearchTerm.MaxYear;
         if(ExcludeKeywords == null)
             ExcludeKeywords=defaultSearchTerm.ExcludeKeywords;
+        if(ExcludeChars == null)
+            ExcludeChars=defaultSearchTerm.ExcludeChars;            
         if(USCities == null)
             USCities=defaultSearchTerm.USCities;
         if(CACities == null)

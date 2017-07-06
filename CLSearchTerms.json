@@ -1,57 +1,62 @@
 [
   {
-    "CLSearch": "camper van"
-  },
-  {
-    "CLSearch": "\"class b\""
-  },
-  {
-    "CLSearch": "\"pop top\"",
+    "MinPrice": 0,
+    "MaxPrice": 150000,
+    "CLSearch": "t5 (camper|westfalia)",
     "Starred": true
   },
   {
-    "CLSearch": "penthouse",
+    "MinPrice": 4000,
+    "MinYear": 2000,
+    "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia)",
     "Starred": true
-  },
-  {
-    "CLSearch": "roadtrek van"
-  },
-  {
-    "MinYear": 1995,
-    "CLSearch": "eurovan camper"
-  },
-  {
-    "CLSearch": "sprinter camper",
-    "Starred": true
-  },
-  {
-    "CLSearch": "pleasure way plateau",
-    "Starred": true
-  },
-  {
-    "CLSearch": "winnebago Era"
-  },
-  {
-    "CLSearch": "gulf stream vista"
-  },
-  {
-    "CLSearch": "four winds ventura"
-  },
-  {
-    "CLSearch": "leisure travel free"
-  },
-  {
-    "CLSearch": "airstream interstate"
-  },
-  {
-    "CLSearch": "promaster camper"
   },
   {
     "MinYear": 1987,
-    "CLSearch": "westfalia diesel"
+    "CLSearch": "vanagon (westfalia|camper) (diesel|subaru|syncro|tdi)",
+    "Starred": true
   },
   {
     "MinYear": 1987,
-    "CLSearch": "westfalia subaru"
+    "CLSearch": "vanagon (westfalia|camper)"
+  },
+  {
+    "CLSearch": "(sprinter|promaster|freightliner|transit) (camper|conversion)",
+    "Starred": true,
+    "IgnoreZeroPrice": true
+  },
+  {
+    "CLSearch": "(sportsmobile) (van|camper|conversion)",
+    "IgnoreZeroPrice": true  },  
+  {
+    "CLSearch": "\"pop top\" | penthouse",
+    "Starred": true
+  },
+  {
+    "CLSearch": "\"pleasure way\" plateau",
+    "IgnoreZeroPrice": true
+  },
+  {
+    "CLSearch": "winnebago Era",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "(\"gulf stream\"|gulfstream) vista",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "\"leisure travel\" \"free spirit\"",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "roadtrek (agile|adventurous|e-trek|zion)",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "airstream interstate",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "(camper | \"class b\") van"
   }
 ]
