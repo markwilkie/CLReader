@@ -6,10 +6,12 @@
     "CLSearch": "\"class b\""
   },
   {
-    "CLSearch": "pop top van"
+    "CLSearch": "\"pop top\"",
+    "Starred": true
   },
   {
-    "CLSearch": "penthouse"
+    "CLSearch": "penthouse",
+    "Starred": true
   },
   {
     "CLSearch": "roadtrek van"
@@ -19,10 +21,12 @@
     "CLSearch": "eurovan camper"
   },
   {
-    "CLSearch": "sprinter camper"
+    "CLSearch": "sprinter camper",
+    "Starred": true
   },
   {
-    "CLSearch": "pleasure way plateau"
+    "CLSearch": "pleasure way plateau",
+    "Starred": true
   },
   {
     "CLSearch": "winnebago Era"
@@ -41,5 +45,13 @@
   },
   {
     "CLSearch": "promaster camper"
+  },
+  {
+    "MinYear": 1987,
+    "CLSearch": "westfalia diesel"
+  },
+  {
+    "MinYear": 1987,
+    "CLSearch": "westfalia subaru"
   }
 ]

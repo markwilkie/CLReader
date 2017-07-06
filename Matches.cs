@@ -61,7 +61,11 @@ public class Matches
         List<Item> itemList = GetSortedItems();
         foreach(Item item in itemList)
         {
-            htmlStream.WriteLine($"{item.PublishDate} - <a href={item.Link}>{item.Title}</a><br>");
+            string starred=" ";
+            if(item.Starred)
+                starred = "*";
+
+            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.CLSearch})<br>");
         }
 
         //Close up file

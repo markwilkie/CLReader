@@ -2,6 +2,7 @@ using System;
 
 public class SearchTerm
 {
+    public bool Starred { get; set; }
     public long MinPrice { get; set; }
     public long MaxPrice { get; set; }
     public long MinYear { get; set; }

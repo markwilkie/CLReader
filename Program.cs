@@ -72,7 +72,7 @@ namespace CLReader
         {
             foreach(string city in cityList.Split(',').ToList())
             {
-                string clURL = $"https://{city}.craigslist{clDomain}/search/sss?format=rss&query={st.CLSearch}&sort=rel";
+                string clURL = $"https://{city}.craigslist{clDomain}/search/sss?excats=5-2-13-22-2-24-1-4-19-1-1-1-1-1-1-3-6-10-1-1-1-2-10-1-1-1-1-1-4-1-7-1-1-1-1-7-1-1-1-1-1-1-1-2-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1&format=rss&query={st.CLSearch}&sort=rel";
                 //Console.WriteLine($"City: <a href={clURL}>{city}</a><br>");
 
                 FeedParser parser = new FeedParser();
@@ -93,18 +93,23 @@ namespace CLReader
                     //Get and check year (if it can parse)
                     bool yearFlag = false;
                     long year = GetYear(item.Title);
-                    if(year >= st.MinYear && year <= st.MaxYear)
+                    if((year == 0 || year >= st.MinYear) && year <= st.MaxYear)
                         yearFlag=true;
 
                     //Get and check price (zero if can't parse)
                     bool priceFlag = false;
                     long price = GetPrice(item.Title);
-                    if(price >= st.MinPrice && price <= st.MaxPrice)
+                    if((price == 0 || price >= st.MinPrice) && price <= st.MaxPrice)
                         priceFlag=true;
 
                     //If we're still ok
                     if(excludeFlag && yearFlag && priceFlag)
                     {
+                        //Update item
+                        item.Starred = st.Starred;
+                        item.CLSearch = st.CLSearch;
+
+                        //Add item to list
                         bool added=matches.AddItem(item);
                         //if(added)
                         //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
