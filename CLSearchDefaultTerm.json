@@ -4,6 +4,7 @@
   "MinYear": 2001,
   "MaxYear": 3000,
   "CLSearch": null,
+  "SambaSearch": null,
   "ExcludeChars": "extended,jeep,hightop,\"hi top\",searching,wanted,consign,utility,truck,delivery,handicap,flatbed,cargo,looking,wtb,vintage,chinook,barter,buying,search,wanted,antique,cruiser,5th,keystone,trailer,slide,b+,b +,b plus,rialta,navion,f250,\"f 250\",f-250,f-350,f-450,f450,s10,xlt,silverado,lariat,class c,class a,widebody,\"wide body\",weekender,passenger",
   "ExcludeKeywords": "\"cash for\",cab,cube,crew,bus,box,trade,coach,shop",
   "USCities": "atlanta,austin,boston,chicago,dallas,denver,detroit,houston,lasvegas,losangeles,miami,minneapolis,newyork,orangecounty,philadelphia,phoenix,portland,raleigh,sacramento,sandiego,seattle,sfbay,washingtondc",

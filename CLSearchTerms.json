@@ -6,6 +6,25 @@
     "Starred": true
   },
   {
+    "MinYear": 1990,
+    "MinPrice":6000,
+    "MaxPrice": 51000,
+    "SambaSearch": "syncro camper",
+    "Starred": true
+  },
+  {
+    "MinYear": 1987,
+    "MinPrice":6000,
+    "MaxPrice": 51000,
+    "SambaSearch": "westfalia"
+  },
+  {
+    "MinYear": 1987,
+    "MinPrice":6000,
+    "MaxPrice": 51000,
+    "SambaSearch": "camper"
+  },
+  {
     "MinPrice": 4000,
     "MinYear": 2000,
     "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia)",
@@ -13,7 +32,9 @@
   },
   {
     "MinYear": 1987,
+    "MaxPrice": 51000,
     "CLSearch": "vanagon (westfalia|camper) (diesel|subaru|syncro|tdi)",
+    "SambaSearch": "syncro",
     "Starred": true
   },
   {

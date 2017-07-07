@@ -36,11 +36,21 @@ namespace CLReader
 
                     Console.WriteLine($"Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.CLSearch}");
 
-                    //Search all US and CA cities asked for
-                    if(st.USCities != null && st.USCities.Length>0)
-                        Search(st,st.USCities,".org");
-                    if(st.CACities != null && st.CACities.Length>0)
-                        Search(st,st.CACities,".ca");
+                    //Craigslist??
+                    if(st.CLSearch != null)
+                    {
+                        //Search all US and CA cities asked for
+                        if(st.USCities != null && st.USCities.Length>0)
+                            SearchCL(st,st.USCities,".org");
+                        if(st.CACities != null && st.CACities.Length>0)
+                            SearchCL(st,st.CACities,".ca");
+                    }
+
+                    //Samba??
+                    if(st.SambaSearch != null)
+                    {
+                        SearchSamba(st);
+                    }
                 }
                 
                 //dump
@@ -68,7 +78,7 @@ namespace CLReader
             host.Start();
         }
 
-        static void Search(SearchTerm st,string cityList,string clDomain)
+        static void SearchCL(SearchTerm st,string cityList,string clDomain)
         {
             foreach(string city in cityList.Split(',').ToList())
             {
@@ -91,7 +101,7 @@ namespace CLReader
 
                     //Get and check price (zero if can't parse)
                     bool priceFlag = false;
-                    long price = GetPrice(item.Title);
+                    long price = GetPrice(item.Title,';');
                     if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
                         priceFlag=true;
 
@@ -100,13 +110,48 @@ namespace CLReader
                     {
                         //Update item
                         item.Starred = st.Starred;
-                        item.CLSearch = st.CLSearch;
+                        item.SearchString = st.CLSearch;
+                        item.WebSite = "CraigsList";
 
                         //Add item to list
                         bool added=matches.AddItem(item);
                         //if(added)
                         //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
                     }
+                }
+            }
+        }
+
+        static void SearchSamba(SearchTerm st)
+        {
+            string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=all&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&section%5B%5D=55&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
+            
+            FeedParser parser = new FeedParser();
+            var items = parser.Parse(clURL,FeedType.RSS);
+            foreach(Item item in items)
+            {
+                //Check for title exclude keywords and chars
+                bool excludeKeywordsFlag = CheckTitle(st.ExcludeKeywords+" ",item.Title);
+                bool excludeCharsFlag = CheckTitle(st.ExcludeChars,item.Title);
+
+                //Get and check price (zero if can't parse)
+                bool priceFlag = false;
+                long price = GetPrice(item.Title,'$');
+                if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
+                    priceFlag=true;
+
+                //If we're still ok
+                if(excludeKeywordsFlag && excludeCharsFlag && priceFlag)
+                {
+                    //Update item
+                    item.Starred = st.Starred;
+                    item.SearchString = st.SambaSearch;
+                    item.WebSite = "Samba";
+
+                    //Add item to list
+                    bool added=matches.AddItem(item);
+                    //if(added)
+                    //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
                 }
             }
         }
@@ -138,12 +183,12 @@ namespace CLReader
 
             return year;
         }
-        static long GetPrice(string title)
+        static long GetPrice(string title,char delimeter)
         {
             long price = 0;
             try
             {
-                string priceStr = title.Substring(title.IndexOf(';')+1);
+                string priceStr = title.Substring(title.IndexOf(delimeter)+1);
                 price = Convert.ToInt32(priceStr);
             }
             catch {}

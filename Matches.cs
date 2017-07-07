@@ -65,7 +65,7 @@ public class Matches
             if(item.Starred)
                 starred = "*";
 
-            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.CLSearch})<br>");
+            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString})<br>");
         }
 
         //Close up file
