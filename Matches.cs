@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Net;
 
 public class Matches
 {
@@ -65,7 +66,8 @@ public class Matches
             if(item.Starred)
                 starred = "*";
 
-            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString})<br>");
+            string encodedTitle = System.Net.WebUtility.UrlEncode($"http://localhost:5001/api/ignoretitle?title={item.Title}");
+            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString}) <a href={encodedTitle}>ignore</a><br>");
         }
 
         //Close up file

@@ -15,6 +15,7 @@ namespace CLReader
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDirectoryBrowser();
+            services.AddMvc();
         }
 
         //public void Configure(IApplicationBuilder app)
@@ -23,6 +24,7 @@ namespace CLReader
             app.UseDeveloperExceptionPage();
             app.UseFileServer(enableDirectoryBrowsing: true);
             app.UseStaticFiles();
+            app.UseMvc();
 
 
             //if all else fails
