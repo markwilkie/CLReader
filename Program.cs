@@ -4,7 +4,9 @@ using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using CLReaderWeb;
 
 namespace CLReader
 {
@@ -13,15 +15,15 @@ namespace CLReader
         static Matches matches;
         static void Main(string[] args)
         {
+            //Dictionary to hold all matches (key is title)
+            matches = new Matches();
+
             //Start up web server to server resulting html files
             StartWebServer();
 
             //Loop forever
             while(true)
             {
-                //Dictionary to hold all matches (key is title)
-                matches = new Matches();
-
                 //Read json with search term list (but first get default)
                 SearchTerm defaultSearchTerm = JsonConvert.DeserializeObject<SearchTerm>(File.ReadAllText("CLSearchDefaultTerm.json"));
                 List<SearchTerm> searchTermList = JsonConvert.DeserializeObject<List<SearchTerm>>(File.ReadAllText("CLSearchTerms.json"));
@@ -54,7 +56,7 @@ namespace CLReader
                 }
                 
                 //dump
-                matches.DumpItems();
+                //matches.DumpItems();
 
                 //wait for 3 hours during the day
                 int hoursToWait = 3;
@@ -63,6 +65,9 @@ namespace CLReader
                 Console.WriteLine($"{DateTime.Now}: Waiting {hoursToWait} hours....");
                 TimeSpan timeToWait = new TimeSpan(hoursToWait,0,0);
                 Thread.Sleep(timeToWait);
+
+                //Get a new matches object
+                matches = new Matches();
             }
         }
 
@@ -73,6 +78,7 @@ namespace CLReader
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseStartup<Startup>()
+                .ConfigureServices(services => services.AddSingleton<Matches>(matches))
                 .UseUrls("http://*:5001");
             var host = webHostBuilder.Build();
             host.Start();

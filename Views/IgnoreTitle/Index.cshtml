@@ -1,0 +1,28 @@
+
+<h3>Last Scan: @ViewBag.LastScanDate</h3>
+
+<ul>
+    @foreach (var item in ViewBag.MatchList)
+    {
+        @if(item.Starred)
+        {
+            @:<b>
+        }
+
+        var rawTitle=@Html.Raw(item.Title);
+        var cancelLink=@WebUtility.UrlEncode(@item.Title);
+
+        <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
+        @item.WebSite
+        <text>: </text>
+        @item.SearchString 
+        <a href=http://localhost:5001/api/ignoretitle?title=@cancelLink>ignore</a>
+
+        @if(item.Starred)
+        {
+            @:</b>
+        }
+
+        @:<br>
+    }
+</ul>

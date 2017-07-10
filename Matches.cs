@@ -2,76 +2,101 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Net;
+using Newtonsoft.Json;
 
-public class Matches
+namespace CLReader
 {
-    Dictionary<string,Item> matchDict;
-
-    public Matches()
+    public class Matches
     {
-        matchDict = new Dictionary<string, Item>();
-    }
+        Dictionary<string,Item> matchDict;
+        List<string> ignoreList;
+        public DateTime LastScanDate { get; set; }
 
-    public Item GetItem(string clItemURL) 
-    {
-        Item item=null;
-        matchDict.TryGetValue(clItemURL,out item);
-        return item;
-    }
-
-    public List<Item> GetSortedItems()
-    {
-        List<Item> sortedList = new List<Item>();
-        
-        foreach(KeyValuePair<string, Item> kvp in matchDict)
+        public Matches()
         {
-            Item item=(Item)kvp.Value;
-            bool addFlag=true;
-            Item[] itemArray = sortedList.ToArray();
-            for(int i=0;i<itemArray.Length;i++)
+            LastScanDate=DateTime.Now;
+            matchDict = new Dictionary<string, Item>();
+            ignoreList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("TitlesToIgnore.json"));
+        }
+
+        public List<Item> GetSortedItems()
+        {
+            List<Item> sortedList = new List<Item>();
+            
+            foreach(KeyValuePair<string, Item> kvp in matchDict)
             {
-                if(itemArray[i].PublishDate <= item.PublishDate)
+                Item item=(Item)kvp.Value;
+
+                bool addFlag=true;
+                Item[] itemArray = sortedList.ToArray();
+                for(int i=0;i<itemArray.Length;i++)
                 {
-                    addFlag=false;
-                    sortedList.Insert(i,item);
-                    break;
+                    if(itemArray[i].PublishDate <= item.PublishDate)
+                    {
+                        addFlag=false;
+                        sortedList.Insert(i,item);
+                        break;
+                    }
                 }
+
+                if(addFlag)
+                    sortedList.Add(item);
             }
 
-            if(addFlag)
-                sortedList.Add(item);
+            return sortedList;
         }
-
-        return sortedList;
-    }
-    public bool AddItem(Item item)
-    {
-        return matchDict.TryAdd(item.Title,item);
-    }
-
-    public void DumpItems()
-    {
-        //Open file
-        string outputPath=Path.Combine("wwwroot","SearchResults.html");
-        FileStream fileHandle = new FileStream (outputPath, FileMode.Create, FileAccess.Write);
-        StreamWriter htmlStream = new StreamWriter(fileHandle);
-        htmlStream.AutoFlush = true;
-
-        htmlStream.WriteLine($"Search current as of {DateTime.Now}<p>");
-
-        List<Item> itemList = GetSortedItems();
-        foreach(Item item in itemList)
+        public bool AddItem(Item item)
         {
-            string starred=" ";
-            if(item.Starred)
-                starred = "*";
-
-            string encodedTitle = System.Net.WebUtility.UrlEncode($"http://localhost:5001/api/ignoretitle?title={item.Title}");
-            htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString}) <a href={encodedTitle}>ignore</a><br>");
+            //make sure we don't need to ignore 
+            string encodedTitle = System.Net.WebUtility.UrlEncode(item.Title);
+            //Console.WriteLine($"Adding -{encodedTitle}-");
+            if(!ignoreList.Contains(encodedTitle))
+                return matchDict.TryAdd(encodedTitle,item);
+            else
+                return false;
         }
 
-        //Close up file
-        fileHandle.Close();
+        public bool RemoveItem(Item item)
+        {
+            string encodedTitle = System.Net.WebUtility.UrlEncode(item.Title);
+            return RemoveItem(encodedTitle);
+        }
 
+        public bool RemoveItem(string encodedTitle)
+        {
+            //Console.WriteLine($"Removing -{encodedTitle}-");
+            return matchDict.Remove(encodedTitle);
+        }
+
+        public List<Item> GetMatchList()
+        {
+            return GetSortedItems();
+        }
+
+        public void DumpItems()
+        {
+            //Open file
+            string outputPath=Path.Combine("wwwroot","SearchResults.html");
+            FileStream fileHandle = new FileStream (outputPath, FileMode.Create, FileAccess.Write);
+            StreamWriter htmlStream = new StreamWriter(fileHandle);
+            htmlStream.AutoFlush = true;
+
+            htmlStream.WriteLine($"Search current as of {DateTime.Now}<p>");
+
+            List<Item> itemList = GetSortedItems();
+            foreach(Item item in itemList)
+            {
+                string starred=" ";
+                if(item.Starred)
+                    starred = "*";
+
+                string encodedTitle = System.Net.WebUtility.UrlEncode($"http://localhost:5001/api/ignoretitle?title={item.Title}");
+                htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString}) <a href={encodedTitle}>ignore</a><br>");
+            }
+
+            //Close up file
+            fileHandle.Close();
+
+        }
     }
 }

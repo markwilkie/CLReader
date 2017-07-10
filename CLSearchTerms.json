@@ -2,7 +2,60 @@
   {
     "MinPrice": 0,
     "MaxPrice": 150000,
-    "CLSearch": "eurovan (camper|westfalia)",
+    "CLSearch": "(t5|t6) (california|camper|westfalia) -volvo -subaru -mercedes",
     "Starred": true
+  },
+  {
+    "MaxPrice": 81000,
+    "CLSearch": "(promaster|transit) (camper | rv)",
+    "Starred": true,
+    "IgnoreZeroPrice": true
+  },
+  {
+    "MinPrice": 11500,
+    "MaxPrice": 36500,
+    "MinYear": 2001,
+    "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia) -mv",
+    "SambaSearch": "winnebago westfalia camper",
+    "Starred": true
+  },
+  {
+    "MaxPrice": 51500,
+    "CLSearch": "(sprinter|freightliner|mercedes) (camper | rv)",
+    "IgnoreZeroPrice": true
+  },
+  {
+    "CLSearch": "(sportsmobile) (van|camper|rv)",
+    "IgnoreZeroPrice": true, 
+    "Starred": true
+  },
+  {
+    "CLSearch": "(\"pop top\" | penthouse) (camper | van)",
+    "Starred": true
+  },
+  {
+    "MaxPrice": 60500,
+    "CLSearch": "ERWIN HYMER",
+    "IgnoreZeroPrice": true
+  },
+  {
+    "CLSearch": "\"pleasure way\" plateau",
+    "IgnoreZeroPrice": true
+  },
+  {
+    "CLSearch": "\"leisure travel\" \"free spirit\"",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "roadtrek (agile|adventurous|e-trek|zion)",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "MaxPrice": 60500,    
+    "CLSearch": "airstream interstate",
+    "IgnoreZeroPrice": true    
+  },
+  {
+    "CLSearch": "(camper | \"class b\") van"
   }
 ]
