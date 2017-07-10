@@ -130,8 +130,9 @@ namespace CLReader
 
         static void SearchSamba(SearchTerm st)
         {
-            string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=all&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&section%5B%5D=55&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
-            
+            //string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=all&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&section%5B%5D=55&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
+            string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=any&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&model%5B%5D=&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
+
             FeedParser parser = new FeedParser();
             var items = parser.Parse(clURL,FeedType.RSS);
             foreach(Item item in items)
