@@ -12,11 +12,12 @@
         var rawTitle=@Html.Raw(item.Title);
         var cancelLink=@WebUtility.UrlEncode(@item.Title);
 
+        <text>@item.PublishDate</text>
         <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
         @item.WebSite
         <text>: </text>
         @item.SearchString 
-        <a href=http://localhost:5001/api/ignoretitle?title=@cancelLink>ignore</a>
+        <a href=http://wilkie1:5001/api/ignoretitle?title=@cancelLink>ignore</a>
 
         @if(item.Starred)
         {
