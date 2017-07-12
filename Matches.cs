@@ -15,6 +15,7 @@ namespace CLReader
         public Matches()
         {
             LastScanDate=DateTime.Now;
+            Console.WriteLine($"Last Scan date set to: {LastScanDate}");
             matchDict = new Dictionary<string, Item>();
             ignoreList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("TitlesToIgnore.json"));
         }

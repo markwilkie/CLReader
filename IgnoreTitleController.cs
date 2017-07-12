@@ -11,19 +11,19 @@ namespace CLReaderWeb
     public class IgnoreTitleController : Controller
     {
         static readonly object _lock = new object();  //used to lock the json load and save portion
-        Matches matches;
+        ContextBag contextBag;
 
-        public IgnoreTitleController(Matches _matches)
+        public IgnoreTitleController(ContextBag _contextBag)
         {
-            matches = _matches;
+            contextBag = _contextBag;
         }
 
         [HttpGet("home")]
         [HttpGet("")]
         public IActionResult Index()
         {
-            ViewBag.LastScanDate=matches.LastScanDate.ToString();
-            ViewBag.MatchList= matches.GetMatchList();
+            ViewBag.LastScanDate=contextBag.Matches.LastScanDate.ToString();
+            ViewBag.MatchList= contextBag.Matches.GetMatchList();
 
             return View();
         }
@@ -55,7 +55,7 @@ namespace CLReaderWeb
             }
 
             //Remove from dictionary
-            matches.RemoveItem(encodedTitle);
+            contextBag.Matches.RemoveItem(encodedTitle);
 
             //Redirecting to main page again
             return LocalRedirect("/");

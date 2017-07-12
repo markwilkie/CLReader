@@ -7,7 +7,7 @@
   },
   {
     "MaxPrice": 81000,
-    "CLSearch": "(promaster|transit) (camper | rv)",
+    "CLSearch": "(promaster|transit|nissan nv) (camper)",
     "Starred": true,
     "IgnoreZeroPrice": true
   },
@@ -21,7 +21,7 @@
   },
   {
     "MaxPrice": 51500,
-    "CLSearch": "(sprinter|freightliner|mercedes) (camper | rv)",
+    "CLSearch": "(sprinter|freightliner) (camper)",
     "IgnoreZeroPrice": true
   },
   {
@@ -32,11 +32,6 @@
   {
     "CLSearch": "(\"pop top\" | penthouse) (camper | van)",
     "Starred": true
-  },
-  {
-    "MaxPrice": 60500,
-    "CLSearch": "ERWIN HYMER",
-    "IgnoreZeroPrice": true
   },
   {
     "CLSearch": "\"pleasure way\" plateau",

@@ -12,18 +12,19 @@ namespace CLReader
 {
     class Program
     {
-        static Matches matches;
         static void Main(string[] args)
         {
             //Dictionary to hold all matches (key is title)
-            matches = new Matches();
+            ContextBag contextBag = new ContextBag();
 
             //Start up web server to server resulting html files
-            StartWebServer();
+            StartWebServer(contextBag);
 
             //Loop forever
             while(true)
             {
+                contextBag.Matches = new Matches();
+
                 //Read json with search term list (but first get default)
                 SearchTerm defaultSearchTerm = JsonConvert.DeserializeObject<SearchTerm>(File.ReadAllText("CLSearchDefaultTerm.json"));
                 List<SearchTerm> searchTermList = JsonConvert.DeserializeObject<List<SearchTerm>>(File.ReadAllText("CLSearchTerms.json"));
@@ -43,15 +44,15 @@ namespace CLReader
                     {
                         //Search all US and CA cities asked for
                         if(st.USCities != null && st.USCities.Length>0)
-                            SearchCL(st,st.USCities,".org");
+                            SearchCL(st,st.USCities,".org",contextBag.Matches);
                         if(st.CACities != null && st.CACities.Length>0)
-                            SearchCL(st,st.CACities,".ca");
+                            SearchCL(st,st.CACities,".ca",contextBag.Matches);
                     }
 
                     //Samba??
                     if(st.SambaSearch != null)
                     {
-                        SearchSamba(st);
+                        SearchSamba(st,contextBag.Matches);
                     }
                 }
                 
@@ -59,32 +60,29 @@ namespace CLReader
                 //matches.DumpItems();
 
                 //wait for 3 hours during the day
-                int hoursToWait = 3;
-                if(DateTime.Now.Hour >= 21)
-                    hoursToWait = 9;
+                int hoursToWait = 2;
+                if(DateTime.Now.Hour >= 22)
+                    hoursToWait = 6;
                 Console.WriteLine($"{DateTime.Now}: Waiting {hoursToWait} hours....");
                 TimeSpan timeToWait = new TimeSpan(hoursToWait,0,0);
                 Thread.Sleep(timeToWait);
-
-                //Get a new matches object
-                matches = new Matches();
             }
         }
 
-        static void StartWebServer()
+        static void StartWebServer(ContextBag contextBag)
         {
             Console.WriteLine($"{DateTime.Now}: Starting Kestrel...");
             var webHostBuilder = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .ConfigureServices(services => services.AddSingleton<Matches>(matches))
+                .ConfigureServices(services => services.AddSingleton<ContextBag>(contextBag))
                 .UseUrls("http://*:5001");
             var host = webHostBuilder.Build();
             host.Start();
         }
 
-        static void SearchCL(SearchTerm st,string cityList,string clDomain)
+        static void SearchCL(SearchTerm st,string cityList,string clDomain,Matches matches)
         {
             foreach(string city in cityList.Split(',').ToList())
             {
@@ -128,7 +126,7 @@ namespace CLReader
             }
         }
 
-        static void SearchSamba(SearchTerm st)
+        static void SearchSamba(SearchTerm st,Matches matches)
         {
             //string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=all&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&section%5B%5D=55&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
             string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=any&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&model%5B%5D=&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
