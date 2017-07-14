@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.XPath;
@@ -108,13 +109,30 @@ namespace CLReader
 			}
 		}
 
-		private DateTime ParseDate(string date)
+		private DateTime ParseDate(string dateString)
 		{
 			DateTime result;
-			if (DateTime.TryParse(date, out result))
+
+			//Console.WriteLine($"Date String: {dateString}");
+
+            if (DateTime.TryParse(dateString, out result))
+			{
+				//Console.WriteLine($"result1: {result}");
 				return result;
+			}
 			else
-				return DateTime.MinValue;
+			{
+				if (DateTime.TryParseExact(dateString, "ddd, dd MMM yyyy HH:mm:ss 'GMT'K", CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+				{
+					//Console.WriteLine($"result2: {result}");
+					return result;
+				}
+				else
+				{
+					//Console.WriteLine($"min value");
+					return DateTime.MinValue;
+				}
+			}
 		}
 	}
 	/// <summary>

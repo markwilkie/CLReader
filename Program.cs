@@ -31,35 +31,43 @@ namespace CLReader
 
                 Console.WriteLine($"{DateTime.Now}: Woke up and am searching again...");
 
-                //Loop through and search
+                //Loop through and search for each entry in the search term list
                 foreach(SearchTerm st in searchTermList)
                 {
                     //Load empty slots w/ default search term
                     st.SetDefaults(defaultSearchTerm);
 
-                    Console.WriteLine($"Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.CLSearch}");
-
                     //Craigslist??
                     if(st.CLSearch != null)
                     {
+                        Console.WriteLine($"CL: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.CLSearch}");
+
                         //Search all US and CA cities asked for
                         if(st.USCities != null && st.USCities.Length>0)
-                            SearchCL(st,st.USCities,".org",contextBag.Matches);
+                            RSSScraper.SearchCL(st,st.USCities,".org",contextBag.Matches);
                         if(st.CACities != null && st.CACities.Length>0)
-                            SearchCL(st,st.CACities,".ca",contextBag.Matches);
+                            RSSScraper.SearchCL(st,st.CACities,".ca",contextBag.Matches);
                     }
 
                     //Samba??
                     if(st.SambaSearch != null)
                     {
-                        SearchSamba(st,contextBag.Matches);
+                        Console.WriteLine($"Samba: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.SambaSearch}");                        
+                        RSSScraper.SearchSamba(st,contextBag.Matches);
+                    }
+
+                    //Ebay??
+                    if(st.EbaySearch != null)
+                    {
+                        Console.WriteLine($"Ebay: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.EbaySearch}");                        
+                        RSSScraper.SearchEbay(st,contextBag.Matches);                        
                     }
 
                     //RV Trader
                     if(st.RVTraderSearch != null)
                     {
-                        RVTraderScraper rvTraderScraper = new RVTraderScraper();
-                        rvTraderScraper.Scrape(st,contextBag.Matches);
+                        Console.WriteLine($"RVTrader: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.RVTraderSearch}");                        
+                        RVTraderScraper.Scrape(st,contextBag.Matches);
                     }
                 }
                 
@@ -87,125 +95,6 @@ namespace CLReader
                 .UseUrls("http://*:5001");
             var host = webHostBuilder.Build();
             host.Start();
-        }
-
-        static void SearchCL(SearchTerm st,string cityList,string clDomain,Matches matches)
-        {
-            foreach(string city in cityList.Split(',').ToList())
-            {
-                string clURL = $"https://{city}.craigslist{clDomain}/search/sss?excats=5-2-13-22-2-24-1-4-19-1-1-1-1-1-1-3-6-10-1-1-1-2-10-1-1-1-1-1-4-1-7-1-1-1-1-7-1-1-1-1-1-1-1-2-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1&format=rss&query={st.CLSearch}&sort=rel";
-                //Console.WriteLine($"City: <a href={clURL}>{city}</a><br>");
-
-                FeedParser parser = new FeedParser();
-                var items = parser.Parse(clURL,FeedType.RDF);
-                foreach(Item item in items)
-                {
-                    //Check for title exclude keywords and chars
-                    bool excludeKeywordsFlag = CheckTitle(st.ExcludeKeywords+" ",item.Title);
-                    bool excludeCharsFlag = CheckTitle(st.ExcludeChars,item.Title);
-
-                    //Get and check year (if it can parse)
-                    bool yearFlag = false;
-                    long year = GetYear(item.Title);
-                    if((year == 0 || year >= st.MinYear) && year <= st.MaxYear)
-                        yearFlag=true;
-
-                    //Get and check price (zero if can't parse)
-                    bool priceFlag = false;
-                    long price = GetPrice(item.Title,';');
-                    if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
-                        priceFlag=true;
-
-                    //If we're still ok
-                    if(excludeKeywordsFlag && excludeCharsFlag && yearFlag && priceFlag)
-                    {
-                        //Update item
-                        item.Starred = st.Starred;
-                        item.SearchString = st.CLSearch;
-                        item.WebSite = "CraigsList";
-
-                        //Add item to list
-                        bool added=matches.AddItem(item);
-                        //if(added)
-                        //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
-                    }
-                }
-            }
-        }
-
-        static void SearchSamba(SearchTerm st,Matches matches)
-        {
-            //string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=all&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&section%5B%5D=55&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
-            string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=any&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&model%5B%5D=&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
-
-            FeedParser parser = new FeedParser();
-            var items = parser.Parse(clURL,FeedType.RSS);
-            foreach(Item item in items)
-            {
-                //Check for title exclude keywords and chars
-                bool excludeKeywordsFlag = CheckTitle(st.ExcludeKeywords+" ",item.Title);
-                bool excludeCharsFlag = CheckTitle(st.ExcludeChars,item.Title);
-
-                //Get and check price (zero if can't parse)
-                bool priceFlag = false;
-                long price = GetPrice(item.Title,'$');
-                if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
-                    priceFlag=true;
-
-                //If we're still ok
-                if(excludeKeywordsFlag && excludeCharsFlag && priceFlag)
-                {
-                    //Update item
-                    item.Starred = st.Starred;
-                    item.SearchString = st.SambaSearch;
-                    item.WebSite = "Samba";
-
-                    //Add item to list
-                    bool added=matches.AddItem(item);
-                    //if(added)
-                    //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
-                }
-            }
-        }
-
-        static bool CheckTitle(string excludeString,string title)
-        {
-            bool excludeFlag = true;
-            foreach(string exclKey in excludeString.Split(',').ToList())
-            {
-                if(exclKey.Length > 1 && title.ToLower().Contains(exclKey.ToLower()))
-                {
-                    excludeFlag=false;
-                    break;
-                }
-            }     
-
-            return excludeFlag;       
-        }
-
-        static long GetYear(string title)
-        {
-            long year = 0;
-            try
-            {
-                string yearStr = title.Substring(0,title.IndexOf(' '));
-                year = Convert.ToInt32(yearStr);
-            }
-            catch {}
-
-            return year;
-        }
-        static long GetPrice(string title,char delimeter)
-        {
-            long price = 0;
-            try
-            {
-                string priceStr = title.Substring(title.IndexOf(delimeter)+1);
-                price = Convert.ToInt32(priceStr);
-            }
-            catch {}
-
-            return price;
         }
     }
 }

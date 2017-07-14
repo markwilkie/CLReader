@@ -12,6 +12,7 @@ namespace CLReader
         public long MaxYear { get; set; }
         public string CLSearch { get; set; }
         public string SambaSearch { get; set; }
+        public string EbaySearch { get; set; }
         public string RVTraderSearch { get; set; }
         public string ExcludeKeywords { get; set; }
         public string ExcludeChars { get; set; }    

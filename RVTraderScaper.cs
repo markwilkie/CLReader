@@ -6,11 +6,21 @@ using System.Linq;
 
 namespace CLReader
 {
-    public class RVTraderScraper
+    static public class RVTraderScraper
     {      
-        public void Scrape(SearchTerm st,Matches matches)
+        static public void Scrape(SearchTerm st,Matches matches)
         {
-            var html = $"https://www.rvtrader.com/search-results?type=Class%20B%7C198068&keyword={st.RVTraderSearch}&radius=any&zip=98026&sort=create_date%3Adesc&modelkeyword=1&layoutView=listView&page=1&price=8000%3A50000&year=2001%3A*&length=*%3A25&";
+            //If there are multiple terms, loop through them
+            foreach(string searchTermToUse in st.RVTraderSearch.Split(',').ToList())
+            {
+                Scrape(st,matches,searchTermToUse);
+            }
+        }
+
+        static public void Scrape(SearchTerm st,Matches matches,string searchTermToUse)
+        {
+            //Nationwide, limited by class B and less than 25'
+            var html = $"https://www.rvtrader.com/search-results?type=Class%20B%7C198068&keyword={searchTermToUse}&radius=any&zip=98026&sort=create_date%3Adesc&modelkeyword=1&layoutView=listView&page=1&price={st.MinPrice}%3A{st.MaxPrice}&year={st.MinYear}%3A*&length=*%3A25&";
 
             HtmlWeb web = new HtmlWeb();
 
@@ -30,8 +40,6 @@ namespace CLReader
             
             foreach(var node in findclasses)
             {
-                //Console.WriteLine("Listing: ");
-
                 try
                 {
                     //Get title and listing link
@@ -43,8 +51,9 @@ namespace CLReader
                             d.Attributes["class"].Value.Contains("listing-info-title")
                         ).Single();
                             
-                    //Console.WriteLine("Title: " + title.Attributes["title"].Value );	
-                    //Console.WriteLine("Link: " + title.Attributes["href"].Value );
+                    //Get title and link
+                    string titleString=title.Attributes["title"].Value;
+                    string link=title.Attributes["href"].Value;
 
                     //Get listing date
                     var listing = node
@@ -55,9 +64,9 @@ namespace CLReader
                             d.Attributes["class"].Value.Contains("companyName")
                         ).Single();
                     
+                    //Parse date
                     string listingDateStr = listing.InnerText.Substring(listing.InnerText.IndexOf("Created")+8);
-                    DateTime listingDate = DateTime.Parse(listingDateStr);
-                    //Console.WriteLine($" Date: {listingDate}");
+                    DateTime publishDate = DateTime.Parse(listingDateStr);
 
                     //Get Price
                     var price = node
@@ -82,20 +91,21 @@ namespace CLReader
                         priceFlag=true;                    
 
                     //Check for exclusions
-                    bool excludeKeywordsFlag = CheckTitle(st.ExcludeKeywords,title.Attributes["title"].Value);
-                    bool excludeCharsFlag = CheckTitle(st.ExcludeChars,title.Attributes["title"].Value);                            
+                    bool excludeKeywordsFlag = Helper.CheckTitle(st.ExcludeKeywords,title.Attributes["title"].Value);
+                    bool excludeCharsFlag = Helper.CheckTitle(st.ExcludeChars,title.Attributes["title"].Value);                            
 
+                    //If we're still good to go, let's add the item
                     if(excludeKeywordsFlag && excludeCharsFlag && priceFlag)
                     {
                         //Add 
                         Item item = new Item
                         {
-                            Link="https://www.rvtrader.com"+title.Attributes["href"].Value,
-                            Title=title.Attributes["title"].Value + price.Element("span").InnerText,
-                            SearchString=st.RVTraderSearch,
+                            Link="https://www.rvtrader.com"+link,
+                            Title=titleString + priceString,
+                            SearchString=searchTermToUse,
                             WebSite="RVTrader",
                             Starred=st.Starred,
-                            PublishDate=listingDate
+                            PublishDate=publishDate
                         };    
 
                         matches.AddItem(item);
@@ -107,21 +117,6 @@ namespace CLReader
                     //Console.WriteLine($"Problem parsing: {node.OuterHtml}");
                 }                	
             }
-        }
-
-        bool CheckTitle(string excludeString,string title)
-        {
-            bool excludeFlag = true;
-            foreach(string exclKey in excludeString.Split(',').ToList())
-            {
-                if(exclKey.Length > 1 && title.ToLower().Contains(exclKey.ToLower()))
-                {
-                    excludeFlag=false;
-                    break;
-                }
-            }     
-
-            return excludeFlag;       
-        }        
+        }       
     }
 }
