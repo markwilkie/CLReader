@@ -3,11 +3,14 @@
     "MinPrice": 0,
     "MaxPrice": 150000,
     "CLSearch": "(t5|t6) (california|camper|westfalia) -volvo -subaru -mercedes",
+    "RVTraderSearch": "t6 california",
     "Starred": true
   },
   {
     "MaxPrice": 81000,
     "CLSearch": "(promaster|transit|nissan nv) (camper)",
+    "RVTraderSearch": "promaster,transit,nissan nv",
+    "EbaySearch": "(promaster,transit) (camper,pop top,penthouse,conversion)",
     "Starred": true,
     "IgnoreZeroPrice": true
   },
@@ -17,11 +20,14 @@
     "MinYear": 2001,
     "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia) -mv",
     "SambaSearch": "winnebago westfalia camper",
+    "EbaySearch": "(eurovan,t4) (camper,westfalia,winnebago) -mv",
     "Starred": true
   },
   {
     "MaxPrice": 51500,
     "CLSearch": "(sprinter|freightliner) (camper)",
+    "EbaySearch": "(sprinter,freightliner) (camper,pop top,penthouse,conversion) -(conversion package)",
+    "RVTraderSearch": "sprinter,freightliner",
     "IgnoreZeroPrice": true
   },
   {
@@ -51,6 +57,8 @@
     "IgnoreZeroPrice": true    
   },
   {
-    "CLSearch": "(camper | \"class b\") van"
+    "CLSearch": "(camper | \"class b\") van",
+    "RVTraderSearch": "van",
+    "EbaySearch": "(camper,\"class b\") (van, conversion, gtrv)"
   }
 ]
