@@ -54,6 +54,13 @@ namespace CLReader
                     {
                         SearchSamba(st,contextBag.Matches);
                     }
+
+                    //RV Trader
+                    if(st.RVTraderSearch != null)
+                    {
+                        RVTraderScraper rvTraderScraper = new RVTraderScraper();
+                        rvTraderScraper.Scrape(st,contextBag.Matches);
+                    }
                 }
                 
                 //dump
