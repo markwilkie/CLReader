@@ -34,6 +34,7 @@ namespace CLReader
 
                 try
                 {
+                    //Get title and listing link
                     var title = node
                         .Descendants( "a" )
                         .Where( d => 
@@ -44,7 +45,21 @@ namespace CLReader
                             
                     //Console.WriteLine("Title: " + title.Attributes["title"].Value );	
                     //Console.WriteLine("Link: " + title.Attributes["href"].Value );
+
+                    //Get listing date
+                    var listing = node
+                        .Descendants( "div" )
+                        .Where( d => 
+                            d.Attributes.Contains("class")
+                            &&
+                            d.Attributes["class"].Value.Contains("companyName")
+                        ).Single();
                     
+                    string listingDateStr = listing.InnerText.Substring(listing.InnerText.IndexOf("Created")+8);
+                    DateTime listingDate = DateTime.Parse(listingDateStr);
+                    //Console.WriteLine($" Date: {listingDate}");
+
+                    //Get Price
                     var price = node
                         .Descendants( "div" )
                         .Where( d => 
@@ -79,7 +94,8 @@ namespace CLReader
                             Title=title.Attributes["title"].Value + price.Element("span").InnerText,
                             SearchString=st.RVTraderSearch,
                             WebSite="RVTrader",
-                            Starred=st.Starred
+                            Starred=st.Starred,
+                            PublishDate=listingDate
                         };    
 
                         matches.AddItem(item);
