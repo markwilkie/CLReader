@@ -8,16 +8,26 @@ namespace CLReader
 {
     public class Matches
     {
-        Dictionary<string,Item> matchDict;
-        List<string> ignoreList;
-        public DateTime LastScanDate { get; set; }
+        public Dictionary<string,Item> matchDict { get; set; }
+        public DateTime LastScanDate { get; set; }   
+
+        List<string> currentIgnoreList;
+        List<string> newIgnoreList;
+
 
         public Matches()
         {
             LastScanDate=DateTime.Now;
             Console.WriteLine($"Last Scan date set to: {LastScanDate}");
             matchDict = new Dictionary<string, Item>();
-            ignoreList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("TitlesToIgnore.json"));
+            currentIgnoreList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("TitlesToIgnore.json"));
+            newIgnoreList = new List<string>();
+        }
+
+        public void SaveNewIgnoreList()
+        {
+            string fileName="TitlesToIgnore.json";
+            System.IO.File.WriteAllText(fileName, JsonConvert.SerializeObject(newIgnoreList, Formatting.Indented));
         }
 
         public List<Item> GetSortedItems()
@@ -58,17 +68,24 @@ namespace CLReader
             //make sure we don't need to ignore 
             string encodedTitle = System.Net.WebUtility.UrlEncode(item.Title);
             //Console.WriteLine($"Adding -{encodedTitle}-");
-            if(!ignoreList.Contains(encodedTitle))
+            if(!currentIgnoreList.Contains(encodedTitle))
             {
                 //Bring forward from last scan to preserve date (repostings and entries with no date)
                 Item lastItem;
-                if(lastMatches != null && matchDict.TryGetValue(encodedTitle,out lastItem))
+                if(lastMatches != null && lastMatches.matchDict.TryGetValue(encodedTitle,out lastItem))
+                {
                     return matchDict.TryAdd(encodedTitle,lastItem);
+                }
                 else
+                {
                     return matchDict.TryAdd(encodedTitle,item);
+                }
             }
             else
             {
+                //Let's save this ignore list entry because it hit a match
+                newIgnoreList.Add(encodedTitle);
+
                 return false;
             }
         }

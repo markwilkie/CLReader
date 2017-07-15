@@ -16,6 +16,7 @@ namespace CLReader
         {
             //Dictionary to hold all matches (key is title)
             ContextBag contextBag = new ContextBag();
+            contextBag.Matches=JsonConvert.DeserializeObject<Matches>(File.ReadAllText("LastMatches.json"));  //this is so that last matches persists
             Matches lastMatches;
 
             //Start up web server to server resulting html files
@@ -86,6 +87,12 @@ namespace CLReader
                         SportsMobileScraper.Scrape(st,contextBag.Matches,lastMatches);
                     }                                  
                 }
+
+                //Save current ignore
+                contextBag.Matches.SaveNewIgnoreList();
+
+                //Save current matches (these become "last" on startup)
+                System.IO.File.WriteAllText("LastMatches.json", JsonConvert.SerializeObject(contextBag.Matches, Formatting.Indented));
                 
                 //dump
                 //matches.DumpItems();
