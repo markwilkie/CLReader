@@ -1,6 +1,27 @@
 
 <h3>Last Scan: @ViewBag.LastScanDate</h3>
 
+<h2>Promoted Listings:</h2>
+<ul>
+    @foreach (var item in ViewBag.PromoteList)
+    {
+        var rawTitle=@Html.Raw(item.Title);
+        var cancelLink=@WebUtility.UrlEncode(@item.Title);
+
+        <text>@item.PublishDate</text>
+        <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
+        @item.WebSite
+        <text>: </text>
+        @item.SearchString 
+        <a href=/api/demotetitle?title=@cancelLink>demote</a>
+
+        @:<br>
+    }
+</ul>
+
+<hr>
+<h2>Listings:</h2>
+
 <ul>
     @foreach (var item in ViewBag.MatchList)
     {
@@ -13,6 +34,7 @@
         var cancelLink=@WebUtility.UrlEncode(@item.Title);
 
         <text>@item.PublishDate</text>
+        <a href=/api/promotetitle?title=@cancelLink>promote</a>
         <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
         @item.WebSite
         <text>: </text>

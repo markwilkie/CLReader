@@ -107,6 +107,22 @@ namespace CLReader
             return GetSortedItems();
         }
 
+        public List<Item> GetPromotedList()
+        {
+            List<string> titlesToPromoteList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("TitlesToPromote.json"));
+            List<Item> promotedList = new List<Item>();
+            Item item;
+
+            //Go through promoted titles and add the items to the list
+            foreach(string titleKey in titlesToPromoteList)
+            {
+                if(matchDict.TryGetValue(titleKey,out item))
+                    promotedList.Add(item);
+            }
+
+            return promotedList;
+        }
+
         public void DumpItems()
         {
             //Open file
