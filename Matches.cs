@@ -46,15 +46,31 @@ namespace CLReader
 
             return sortedList;
         }
-        public bool AddItem(Item item)
+        
+        public Item GetIem(string title)
+        {
+            string encodedTitle = System.Net.WebUtility.UrlEncode(title);
+            return matchDict[encodedTitle];
+        }
+
+        public bool AddItem(Item item,Matches lastMatches)
         {
             //make sure we don't need to ignore 
             string encodedTitle = System.Net.WebUtility.UrlEncode(item.Title);
             //Console.WriteLine($"Adding -{encodedTitle}-");
             if(!ignoreList.Contains(encodedTitle))
-                return matchDict.TryAdd(encodedTitle,item);
+            {
+                //Bring forward from last scan to preserve date (repostings and entries with no date)
+                Item lastItem;
+                if(lastMatches != null && matchDict.TryGetValue(encodedTitle,out lastItem))
+                    return matchDict.TryAdd(encodedTitle,lastItem);
+                else
+                    return matchDict.TryAdd(encodedTitle,item);
+            }
             else
+            {
                 return false;
+            }
         }
 
         public bool RemoveItem(Item item)

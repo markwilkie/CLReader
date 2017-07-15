@@ -23,7 +23,7 @@ namespace CLReader
             Link = "";
             Title = "";
             Content = "";
-            PublishDate = DateTime.Today;
+            PublishDate = DateTime.Now;
             FeedType = FeedType.RSS;
         }
     }

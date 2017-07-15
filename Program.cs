@@ -16,6 +16,7 @@ namespace CLReader
         {
             //Dictionary to hold all matches (key is title)
             ContextBag contextBag = new ContextBag();
+            Matches lastMatches;
 
             //Start up web server to server resulting html files
             StartWebServer(contextBag);
@@ -23,6 +24,7 @@ namespace CLReader
             //Loop forever
             while(true)
             {
+                lastMatches=contextBag.Matches;
                 contextBag.Matches = new Matches();
 
                 //Read json with search term list (but first get default)
@@ -44,31 +46,45 @@ namespace CLReader
 
                         //Search all US and CA cities asked for
                         if(st.USCities != null && st.USCities.Length>0)
-                            RSSScraper.SearchCL(st,st.USCities,".org",contextBag.Matches);
+                            RSSScraper.SearchCL(st,st.USCities,".org",contextBag.Matches,lastMatches);
                         if(st.CACities != null && st.CACities.Length>0)
-                            RSSScraper.SearchCL(st,st.CACities,".ca",contextBag.Matches);
+                            RSSScraper.SearchCL(st,st.CACities,".ca",contextBag.Matches,lastMatches);
                     }
 
                     //Samba??
                     if(st.SambaSearch != null)
                     {
                         Console.WriteLine($"Samba: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.SambaSearch}");                        
-                        RSSScraper.SearchSamba(st,contextBag.Matches);
+                        RSSScraper.SearchSamba(st,contextBag.Matches,lastMatches);
                     }
 
                     //Ebay??
                     if(st.EbaySearch != null)
                     {
                         Console.WriteLine($"Ebay: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.EbaySearch}");                        
-                        RSSScraper.SearchEbay(st,contextBag.Matches);                        
+                        RSSScraper.SearchEbay(st,contextBag.Matches,lastMatches);                        
                     }
 
                     //RV Trader
                     if(st.RVTraderSearch != null)
                     {
                         Console.WriteLine($"RVTrader: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.RVTraderSearch}");                        
-                        RVTraderScraper.Scrape(st,contextBag.Matches);
+                        RVTraderScraper.Scrape(st,contextBag.Matches,lastMatches);
                     }
+
+                    //RTV
+                    if(st.RTVSearch != null)
+                    {
+                        Console.WriteLine($"RTV: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.RTVSearch}");                        
+                        RTVScraper.Scrape(st,contextBag.Matches,lastMatches);
+                    }        
+
+                    //Sports mobile
+                    if(st.SportsMobileSearch != null)
+                    {
+                        Console.WriteLine($"SportsMobile: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.SportsMobileSearch}");                        
+                        SportsMobileScraper.Scrape(st,contextBag.Matches,lastMatches);
+                    }                                  
                 }
                 
                 //dump

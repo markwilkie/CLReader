@@ -14,6 +14,8 @@ namespace CLReader
         public string SambaSearch { get; set; }
         public string EbaySearch { get; set; }
         public string RVTraderSearch { get; set; }
+        public string RTVSearch { get; set; }
+        public string SportsMobileSearch { get; set; }
         public string ExcludeKeywords { get; set; }
         public string ExcludeChars { get; set; }    
         public string USCities { get; set; }

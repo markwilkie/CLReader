@@ -8,16 +8,16 @@ namespace CLReader
 {
     static public class RVTraderScraper
     {      
-        static public void Scrape(SearchTerm st,Matches matches)
+        static public void Scrape(SearchTerm st,Matches matches,Matches lastMatches)
         {
             //If there are multiple terms, loop through them
             foreach(string searchTermToUse in st.RVTraderSearch.Split(',').ToList())
             {
-                Scrape(st,matches,searchTermToUse);
+                Scrape(st,matches,lastMatches,searchTermToUse);
             }
         }
 
-        static public void Scrape(SearchTerm st,Matches matches,string searchTermToUse)
+        static public void Scrape(SearchTerm st,Matches matches,Matches lastMatches,string searchTermToUse)
         {
             //Nationwide, limited by class B and less than 25'
             var html = $"https://www.rvtrader.com/search-results?type=Class%20B%7C198068&keyword={searchTermToUse}&radius=any&zip=98026&sort=create_date%3Adesc&modelkeyword=1&layoutView=listView&page=1&price={st.MinPrice}%3A{st.MaxPrice}&year={st.MinYear}%3A*&length=*%3A25&";
@@ -108,7 +108,7 @@ namespace CLReader
                             PublishDate=publishDate
                         };    
 
-                        matches.AddItem(item);
+                        matches.AddItem(item,lastMatches);
                     }
                 }
                 catch (System.Exception e)

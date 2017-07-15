@@ -7,7 +7,7 @@ namespace CLReader
 {
     static public class RSSScraper
     {
-        static public void SearchCL(SearchTerm st,string cityList,string clDomain,Matches matches)
+        static public void SearchCL(SearchTerm st,string cityList,string clDomain,Matches matches,Matches lastMatches)
         {
             foreach(string city in cityList.Split(',').ToList())
             {
@@ -43,7 +43,7 @@ namespace CLReader
                         item.WebSite = "CraigsList";
 
                         //Add item to list
-                        bool added=matches.AddItem(item);
+                        bool added=matches.AddItem(item,lastMatches);
                         //if(added)
                         //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
                     }
@@ -51,7 +51,7 @@ namespace CLReader
             }
         }
 
-        static public void SearchSamba(SearchTerm st,Matches matches)
+        static public void SearchSamba(SearchTerm st,Matches matches,Matches lastMatches)
         {
             //Searches only within eurovan
             string clURL = $"https://www.thesamba.com/vw/classifieds/rss/search.php?type=text&stype=any&keywords={st.SambaSearch}&yearfrom={st.MinYear}&yearto={st.MaxYear}&model%5B%5D=&section%5B%5D=75&country=USA&wanted=hide&sort=date&sort_order=DESC";
@@ -79,14 +79,14 @@ namespace CLReader
                     item.WebSite = "Samba";
 
                     //Add item to list
-                    bool added=matches.AddItem(item);
+                    bool added=matches.AddItem(item,lastMatches);
                     //if(added)
                     //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
                 }
             }
         }
 
-        static public void SearchEbay(SearchTerm st,Matches matches)
+        static public void SearchEbay(SearchTerm st,Matches matches,Matches lastMatches)
         {
             //enclode search terms
             string encodedSearch = System.Net.WebUtility.UrlEncode(st.EbaySearch);
@@ -124,7 +124,7 @@ namespace CLReader
                     item.WebSite = "Ebay";
 
                     //Add item to list
-                    bool added=matches.AddItem(item);
+                    bool added=matches.AddItem(item,lastMatches);
                     //if(added)
                     //    Console.WriteLine($"{price} - <a href={item.Link}>{item.Title}</a><br>");
                 }
