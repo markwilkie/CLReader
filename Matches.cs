@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Net;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace CLReader
@@ -28,33 +29,6 @@ namespace CLReader
         {
             string fileName="TitlesToIgnore.json";
             System.IO.File.WriteAllText(fileName, JsonConvert.SerializeObject(newIgnoreList, Formatting.Indented));
-        }
-
-        public List<Item> GetSortedItems()
-        {
-            List<Item> sortedList = new List<Item>();
-            
-            foreach(KeyValuePair<string, Item> kvp in matchDict)
-            {
-                Item item=(Item)kvp.Value;
-
-                bool addFlag=true;
-                Item[] itemArray = sortedList.ToArray();
-                for(int i=0;i<itemArray.Length;i++)
-                {
-                    if(itemArray[i].PublishDate <= item.PublishDate)
-                    {
-                        addFlag=false;
-                        sortedList.Insert(i,item);
-                        break;
-                    }
-                }
-
-                if(addFlag)
-                    sortedList.Add(item);
-            }
-
-            return sortedList;
         }
         
         public Item GetIem(string title)
@@ -104,7 +78,11 @@ namespace CLReader
 
         public List<Item> GetMatchList()
         {
-            return GetSortedItems();
+            List<Item> matchesList = matchDict.Values.ToList();
+
+            ItemPublishDateComparer ic = new ItemPublishDateComparer();
+            matchesList.Sort(ic);
+            return matchesList;
         }
 
         public List<Item> GetPromotedList()
@@ -120,33 +98,27 @@ namespace CLReader
                     promotedList.Add(item);
             }
 
+            ItemPublishDateComparer ic = new ItemPublishDateComparer();
+            promotedList.Sort(ic);
             return promotedList;
         }
-
-        public void DumpItems()
-        {
-            //Open file
-            string outputPath=Path.Combine("wwwroot","SearchResults.html");
-            FileStream fileHandle = new FileStream (outputPath, FileMode.Create, FileAccess.Write);
-            StreamWriter htmlStream = new StreamWriter(fileHandle);
-            htmlStream.AutoFlush = true;
-
-            htmlStream.WriteLine($"Search current as of {DateTime.Now}<p>");
-
-            List<Item> itemList = GetSortedItems();
-            foreach(Item item in itemList)
-            {
-                string starred=" ";
-                if(item.Starred)
-                    starred = "*";
-
-                string encodedTitle = System.Net.WebUtility.UrlEncode($"http://localhost:5001/api/ignoretitle?title={item.Title}");
-                htmlStream.WriteLine($"{starred} {item.PublishDate} - <a href={item.Link}>{item.Title}</a> ({item.WebSite}:{item.SearchString}) <a href={encodedTitle}>ignore</a><br>");
-            }
-
-            //Close up file
-            fileHandle.Close();
-
-        }
     }
+
+    //So we can sort our lists and dictionaries
+    public class ItemPublishDateComparer : IComparer<Item>
+    {
+        public int Compare(Item item1, Item item2)
+        {
+            //-1 item1<item2 0-item1=item2, and 1=item1>item2
+            int retValue=0;
+            if(item1.PublishDate < item2.PublishDate)
+                retValue=1;
+            if(item1.PublishDate == item2.PublishDate)
+                retValue=0;
+            if(item1.PublishDate > item2.PublishDate)
+                retValue=-1;            
+
+            return retValue;
+        }
+    }    
 }
