@@ -23,8 +23,8 @@ namespace CLReaderWeb
         public IActionResult Index()
         {
             ViewBag.LastScanDate = contextBag.Matches.LastScanDate.ToString();
-            ViewBag.MatchList = contextBag.Matches.GetMatchList();
             ViewBag.PromoteList = contextBag.Matches.GetPromotedList();
+            ViewBag.MatchList = contextBag.Matches.GetNonPromotedList(ViewBag.PromoteList);
 
             return View();
         }

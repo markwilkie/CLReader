@@ -76,9 +76,14 @@ namespace CLReader
             return matchDict.Remove(encodedTitle);
         }
 
-        public List<Item> GetMatchList()
+        public List<Item> GetNonPromotedList(List<Item> promotedList)
         {
             List<Item> matchesList = matchDict.Values.ToList();
+
+            foreach(Item promtedItem in promotedList)
+            {
+                matchesList.Remove(promtedItem);
+            }            
 
             ItemPublishDateComparer ic = new ItemPublishDateComparer();
             matchesList.Sort(ic);

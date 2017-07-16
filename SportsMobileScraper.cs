@@ -7,12 +7,26 @@ using System.Linq;
 namespace CLReader
 {
     static public class SportsMobileScraper
-    {      
+    {
         static public void Scrape(SearchTerm st,Matches matches,Matches lastMatches)
         {
-            //Nationwide, limited by class B and less than 25'
-            var html = $"http://sportsmobile.com/inventory/cars-for-sale/";
+            string html;
 
+            //Texas
+            html = $"http://sportsmobile.com/z-PO_texas.html";
+            Scrape(st,matches,lastMatches,html);       
+
+            //California
+            html = $"http://sportsmobile.com/z-PO_calif.html";
+            Scrape(st,matches,lastMatches,html);   
+
+            //Indiana
+            html = $"http://sportsmobile.com/z-PO_indy.html";
+            Scrape(st,matches,lastMatches,html);                                
+        }   
+
+        static public void Scrape(SearchTerm st,Matches matches,Matches lastMatches,string html)
+        {
             HtmlWeb web = new HtmlWeb();
 
             var _doc = web.Load(html);
