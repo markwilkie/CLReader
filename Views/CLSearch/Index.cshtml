@@ -21,16 +21,27 @@
             { name: "WebSite", hidden: true },   
             { name: "SearchString", hidden: true },    
             { name: "act", template: "actions", align: "left", width: 50 }, 
-            { label: "PublishDate", name: "PublishDate", width: 150 },           
+            { label: "Publish Date", name: "PublishDate", width: 125,
+                formatter: "date",
+                formatoptions: { srcformat: "ISO8601Long", newformat: "m/d/y h:i A"
+                }},           
             { name: 'Entry', title: false, width: 700,
+                cellattr: function (rowId, cellValue, rowObject, cm, rdata)  {
+                    if(rowObject.JennieInterested || rowObject.MarkInterested)
+                        return 'style="font-size:125%;" class="ui-state-error-text ui-state-error";"'; 
+                    if(rowObject.JennieBuy || rowObject.MarkBuy)
+                        return 'style="font-size:125%;" class="ui-state-error-text ui-state-highlight";"';                         
+                    if(rowObject.Starred)
+                        return ' style="font-size:120%"';
+                },            
                 formatter: function (cellvalue, options, rowObject) {
                     return '<a href="' + rowObject.Link + '">' + rowObject.Title + ' (' + rowObject.WebSite + ': ' + rowObject.SearchString + ')</a>';
                 }},
-            { label: "Starred", name: "Starred", width: 70, template: "booleanCheckbox" },
-            { label: "Jen", name: "JennieInterested", width: 70, template: "booleanCheckbox" },
-            { label: "Jen Buy", name: "JennieBuy", width: 70, template: "booleanCheckbox" },
-            { label: "Mark", name: "MarkInterested", width: 70, template: "booleanCheckbox" },
-            { label: "Mark Buy", name: "MarkBuy", width: 70, template: "booleanCheckbox" }
+            { label: "Starred", name: "Starred",  hidden: true },
+            { label: "Jen", name: "JennieInterested", width: 60, template: "booleanCheckbox" },
+            { label: "Jen Buy", name: "JennieBuy", width: 60, template: "booleanCheckbox" },
+            { label: "Mark", name: "MarkInterested", width: 60, template: "booleanCheckbox" },
+            { label: "Mark Buy", name: "MarkBuy", width: 63, template: "booleanCheckbox" }
         ],
         pager: "#pager",
         rowNum: 25,
@@ -67,11 +78,11 @@
         {}, // settings for add
         {}, // settings for delete
         {} // search options
-    ).jqGrid("filterToolbar"); 
+    ).jqGrid("filterToolbar", {searchOnEnter: false, defaultSearch:"cn", ignoreCase:true}); 
 
 
     function refreshEntries() {      
-        $("#list").trigger("reloadGrid", { fromServer: true, current:true });
+        $("#list").trigger('reloadGrid', { fromServer: true, current:true });
     }
 
     function demoteEntry(title,user) {
