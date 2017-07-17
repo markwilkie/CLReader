@@ -47,7 +47,7 @@ namespace CLReader
 								Content = item.Elements().First(i => i.Name.LocalName == "content").Value,
 								Link = item.Elements().First(i => i.Name.LocalName == "link").Attribute("href").Value,
 								PublishDate = ParseDate(item.Elements().First(i => i.Name.LocalName == "published").Value),
-								Title = item.Elements().First(i => i.Name.LocalName == "title").Value
+								Title = System.Net.WebUtility.HtmlDecode(item.Elements().First(i => i.Name.LocalName == "title").Value)
 							};
 				return entries.ToList();
 			}
@@ -73,7 +73,7 @@ namespace CLReader
 								Content = item.Elements().First(i => i.Name.LocalName == "description").Value,
 								Link = item.Elements().First(i => i.Name.LocalName == "link").Value,
 								PublishDate = ParseDate(item.Elements().First(i => i.Name.LocalName == "pubDate").Value),
-								Title = item.Elements().First(i => i.Name.LocalName == "title").Value
+								Title = System.Net.WebUtility.HtmlDecode(item.Elements().First(i => i.Name.LocalName == "title").Value)
 							};
 				return entries.ToList();
 			}
@@ -99,8 +99,9 @@ namespace CLReader
 								Content = item.Elements().First(i => i.Name.LocalName == "description").Value,
 								Link = item.Elements().First(i => i.Name.LocalName == "link").Value,
 								PublishDate = ParseDate(item.Elements().First(i => i.Name.LocalName == "date").Value),
-								Title = item.Elements().First(i => i.Name.LocalName == "title").Value
+								Title = System.Net.WebUtility.HtmlDecode(item.Elements().First(i => i.Name.LocalName == "title").Value)
 							};
+
 				return entries.ToList();
 			}
 			catch

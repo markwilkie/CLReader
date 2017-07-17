@@ -12,8 +12,10 @@ namespace CLReader
         public string Content { get; set; }
         public string SearchString { get; set; }
         public bool Starred { get; set; }
-        public bool Emphasized { get; set; }
-        public bool Hot { get; set; }
+        public bool MarkBuy { get; set; }
+        public bool JennieBuy { get; set; }
+        public bool MarkInterested { get; set; }
+        public bool JennieInterested { get; set; }        
         public string WebSite { get; set; }
         public DateTime PublishDate { get; set; }
         public FeedType FeedType { get; set; }

@@ -20,8 +20,7 @@
     "MinYear": 2001,
     "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia) -mv",
     "SambaSearch": "winnebago westfalia camper",
-    "EbaySearch": "(eurovan,t4) (camper,westfalia,winnebago) -mv",
-    "Starred": true
+    "EbaySearch": "(eurovan,t4) (camper,westfalia,winnebago) -mv"
   },
   {
     "MaxPrice": 51500,
@@ -53,8 +52,9 @@
     "IgnoreZeroPrice": true    
   },
   {
-    "MaxPrice": 60500,    
+    "MaxPrice": 51500,    
     "CLSearch": "airstream interstate",
+    "RVTraderSearch": "airstream interstate",
     "IgnoreZeroPrice": true    
   },
   {

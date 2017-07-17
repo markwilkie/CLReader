@@ -1,51 +1,127 @@
 
 <h3>Last Scan: @ViewBag.LastScanDate</h3>
 
-<h2>Promoted Listings:</h2>
-<ul>
-    @foreach (var item in ViewBag.PromoteList)
-    {
-        var rawTitle=@Html.Raw(item.Title);
-        var cancelLink=@WebUtility.UrlEncode(@item.Title);
+<table id="promotedList"><tr><td></td></tr></table> 
 
-        <text>@item.PublishDate</text>
-        <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
-        @item.WebSite
-        <text>: </text>
-        @item.SearchString 
-        <a href=/api/demotetitle?title=@cancelLink>demote</a>
+<table id="list"><tr><td></td></tr></table> 
 
-        @:<br>
+<div id="pager"></div>  
+
+@section Scripts
+{        
+    <script>
+
+    $("#list").jqGrid({
+        url: "/api/matches",
+        datatype: "JSON",
+        mtype: "GET",
+        colModel: [
+            { name: "Title", key:true, hidden: true },  
+            { name: "Link", hidden: true },        
+            { name: "WebSite", hidden: true },   
+            { name: "SearchString", hidden: true },    
+            { name: "act", template: "actions", align: "left", width: 50 }, 
+            { label: "PublishDate", name: "PublishDate", width: 150 },           
+            { name: 'Entry', title: false, width: 700,
+                formatter: function (cellvalue, options, rowObject) {
+                    return '<a href="' + rowObject.Link + '">' + rowObject.Title + ' (' + rowObject.WebSite + ': ' + rowObject.SearchString + ')</a>';
+                }},
+            { label: "Starred", name: "Starred", width: 70, template: "booleanCheckbox" },
+            { label: "Jen", name: "JennieInterested", width: 70, template: "booleanCheckbox" },
+            { label: "Jen Buy", name: "JennieBuy", width: 70, template: "booleanCheckbox" },
+            { label: "Mark", name: "MarkInterested", width: 70, template: "booleanCheckbox" },
+            { label: "Mark Buy", name: "MarkBuy", width: 70, template: "booleanCheckbox" }
+        ],
+        pager: "#pager",
+        rowNum: 25,
+        multiSort: true,
+        //sortname: "PublishDate",
+        loadonce : true,
+        viewrecords: true,
+        gridview: true,   
+        forceClientSorting: true,  
+        caption: "StreamCapture Schedule",
+        actionsNavOptions: {
+            editbutton: false,
+            delbutton: false,
+            custom: [
+                { action: "promoteRow", position: "first",
+                    onClick: function (options) {
+                        promoteEntry(options.rowid,getParameterByName('user'));
+                        //alert("Post, rowid=" + options.rowid);
+                    } },
+                { action: "demoteRow", 
+                    onClick: function (options) {
+                        demoteEntry(options.rowid,getParameterByName('user'));                 
+                } }
+            ],
+            promoteRowicon: "ui-icon-plus",
+            promoteentry: "Prmote Entry",
+            demoteRow: "Ignore Entry", 
+            demoteRowicon: "ui-icon-cancel"      
+}        
+    }).navGrid("#pager", {edit: false, add: false, del: false, search: false, refresh: true, refreshstate: "current",
+            //beforeRefresh: function(){console.log("beforeRefresh");},
+            afterRefresh: function(){refreshEntries()}},
+        {}, // settings for edit
+        {}, // settings for add
+        {}, // settings for delete
+        {} // search options
+    ).jqGrid("filterToolbar"); 
+
+
+    function refreshEntries() {      
+        $("#list").trigger("reloadGrid", { fromServer: true, current:true });
     }
-</ul>
 
-<hr>
-<h2>Listings:</h2>
+    function demoteEntry(title,user) {
+        jQuery.support.cors = true;
+        
+        title=encodeURIComponent(title);
+        //title=escape(title);
 
-<ul>
-    @foreach (var item in ViewBag.MatchList)
-    {
-        @if(item.Starred)
-        {
-            @:<b>
-        }
+        //alert('title='+title+'&user='+user);
+        $.ajax({
+            url: '/api/demotetitle',
+            type: 'GET',
+            data: 'title='+title+'&user='+user, 
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function (data) {
+                $("#list").trigger("reloadGrid", { fromServer: true, current: true });
+                //alert ("Show Cancelled")
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Request: " + XMLHttpRequest);
+                alert("Status: " + textStatus); 
+                alert("Error: " + errorThrown); 
+            } 
+        });     
+    }  
 
-        var rawTitle=@Html.Raw(item.Title);
-        var cancelLink=@WebUtility.UrlEncode(@item.Title);
+    function promoteEntry(title,user) {
+        jQuery.support.cors = true;
 
-        <text>@item.PublishDate</text>
-        <a href=/api/promotetitle?title=@cancelLink>promote</a>
-        <a href=@Html.Raw(@item.Link)>@rawTitle</a> 
-        @item.WebSite
-        <text>: </text>
-        @item.SearchString 
-        <a href=/api/ignoretitle?title=@cancelLink>ignore</a>
+        title=encodeURIComponent(title);
+        //title=escape(title);
 
-        @if(item.Starred)
-        {
-            @:</b>
-        }
-
-        @:<br>
+        $.ajax({
+            url: '/api/promotetitle',
+            type: 'GET',
+            data: 'title='+title+'&user='+user, 
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function(data) {
+                $("#list").trigger("reloadGrid", { fromServer: true, current: true });
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            } 
+        }); 
     }
-</ul>
+        
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    };
+        
+    </script> 
+}  

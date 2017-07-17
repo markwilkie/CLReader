@@ -92,7 +92,8 @@ namespace CLReader
                 contextBag.Matches.SaveNewIgnoreList();
 
                 //Save current matches (these become "last" on startup)
-                System.IO.File.WriteAllText("LastMatches.json", JsonConvert.SerializeObject(contextBag.Matches, Formatting.Indented));
+                contextBag.Matches.Save();
+                //System.IO.File.WriteAllText("LastMatches.json", JsonConvert.SerializeObject(contextBag.Matches, Formatting.Indented));
                 
                 //dump
                 //matches.DumpItems();

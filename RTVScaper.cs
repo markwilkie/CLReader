@@ -49,7 +49,8 @@ namespace CLReader
                             d.Attributes["itemprop"].Value.Contains("name")
                         ).Single();
                             
-                    string titleString=title.Attributes["content"].Value;
+                    //string titleString=title.Attributes["content"].Value;
+                    string titleString= System.Net.WebUtility.HtmlDecode(title.Attributes["content"].Value);
                     //Console.WriteLine($"Title: {titleString}");
 
                     //Get URL

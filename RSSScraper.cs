@@ -30,7 +30,7 @@ namespace CLReader
 
                     //Get and check price (zero if can't parse)
                     bool priceFlag = false;
-                    long price = GetPrice(item.Title,';');
+                    long price = GetPrice(item.Title,'$');
                     if(((price == 0 && !st.IgnoreZeroPrice) || price >= st.MinPrice) && price <= st.MaxPrice)
                         priceFlag=true;
 

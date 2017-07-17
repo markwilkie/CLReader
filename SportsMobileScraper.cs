@@ -63,7 +63,7 @@ namespace CLReader
                             d.Attributes.Contains("href")
                             ).Single();		
                     
-                    string titleString= title.InnerText;
+                    string titleString= System.Net.WebUtility.HtmlDecode(title.InnerText);
                     //Console.WriteLine($"Title: {titleString}");
                   
                     string link=title.Attributes["href"].Value;
@@ -165,7 +165,7 @@ namespace CLReader
                             d.Attributes["class"].Value.Contains("random_title")
                             ).Single();		
                     
-                    string titleString=title.InnerText;
+                    string titleString= System.Net.WebUtility.HtmlDecode(title.InnerText);
                     //Console.WriteLine($"Title: {titleString}");
 
                     //Get URL

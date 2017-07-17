@@ -52,7 +52,8 @@ namespace CLReader
                         ).Single();
                             
                     //Get title and link
-                    string titleString=title.Attributes["title"].Value;
+                    //string titleString=title.Attributes["title"].Value;
+                    string titleString= System.Net.WebUtility.HtmlDecode(title.Attributes["title"].Value);
                     string link=title.Attributes["href"].Value;
 
                     //Get listing date
