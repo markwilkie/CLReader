@@ -37,6 +37,17 @@ namespace CLReaderWeb
             return JsonConvert.SerializeObject(contextBag.Matches.GetList());
         }
 
+        [HttpGet("/api/marklinkclicked")]
+        public object MarkLinkClicked(string title,string user)
+        {
+            title=System.Net.WebUtility.HtmlDecode(title);
+            Console.WriteLine($"Marking link for {title} clicked for user {user}");
+            contextBag.Matches.MarkClicked(title,user);
+
+            //Redirecting to main page again
+            return LocalRedirect("/");
+        }        
+
         [HttpGet("/api/promotetitle")]
         public object PromoteTitle(string title,string user)
         {

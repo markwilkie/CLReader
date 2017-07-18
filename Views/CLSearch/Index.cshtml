@@ -33,6 +33,7 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
     //Sets user on dropdown change
     function setUser(data) { 
         user = data;
+        refreshEntries();
     }     
 
     //Grid itself
@@ -51,15 +52,30 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
                 }},              
             { name: "Title", key:true, align: "left", width: 700, formatter:'showlink', formatoptions: { baseLinkUrl: 'javascript:', showAction: "openLink('", addParam: "');"},
                 cellattr: function (rowId, cellValue, rowObject, cm, rdata)  {
+                    var styleTag=' style="';
+                    var classTag=' class=';
+
                     if(rowObject.JennieInterested || rowObject.MarkInterested)
-                        return 'style="font-size:125%;" class="ui-state-error-text ui-state-error";"'; 
+                        classTag=classTag+'"ui-state-error-text ui-state-error";';
                     if(rowObject.JennieBuy || rowObject.MarkBuy)
-                        return 'style="font-size:125%;" class="ui-state-error-text ui-state-highlight";"';                         
+                        classTag=classTag+'"ui-state-error-text ui-state-error ui-state-highlight";';
+                    if(rowObject.JennieInterested || rowObject.MarkInterested || rowObject.JennieBuy || rowObject.MarkBuy)
+                        styleTag = styleTag + 'font-size:125%;';
                     if(rowObject.Starred)
-                        return ' style="font-size:120%"';
+                        styleTag = styleTag + 'font-size:120%;';
+                    if(!rowObject.MarkClicked && user=='Mark')
+                        styleTag = styleTag + 'font-weight:bolder;';
+                    if(!rowObject.JennieClicked && user=='Jennie')
+                        styleTag = styleTag + 'font-weight:bolder;';                        
+
+                    styleTag=styleTag+'"';
+                    //classTag=classTag+'"';
+                    return styleTag + " " + classTag;
                 }
             },         
-            { label: "Starred", name: "Starred",  hidden: true },
+            { label: "Starred", name: "Starred", hidden: true },
+            { label: "MarkClick", name: "MarkClicked", hidden: true, template: "booleanCheckbox" },            
+            { label: "JenClick", name: "JennieClicked", hidden: true, template: "booleanCheckbox" }, 
             { label: "Jen", name: "JennieInterested", width: 60, template: "booleanCheckbox" },
             { label: "Jen Buy", name: "JennieBuy", width: 60, template: "booleanCheckbox" },
             { label: "Mark", name: "MarkInterested", width: 60, template: "booleanCheckbox" },
@@ -109,10 +125,23 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
 
     //Used by showlink formatter to open the URL
     function openLink(id) {
+        //Make sure there's a user
+        if(!user)
+        {
+            alert("Please select your name and try again");
+            return;
+        }
+
+        //Grab title and link from grid
         var row = id.split("=");
         var row_ID = row[1];   
+        var title = $("#list").getCell(row_ID, 'Title');
         var url= $("#list").getCell(row_ID, 'Link');
 
+        //Mark link as clicked
+        clickLink(title,user);
+
+        //Open new url
         window.open(url);
     }    
 
@@ -120,6 +149,30 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
     function refreshEntries() {      
         $("#list").trigger('reloadGrid', { fromServer: true, current:true });
     }
+
+    function clickLink(title,user) {
+        jQuery.support.cors = true;
+        
+        title=encodeURIComponent(title);
+        //title=escape(title);
+
+        //alert('title='+title+'&user='+user);
+        $.ajax({
+            url: '/api/marklinkclicked',
+            type: 'GET',
+            data: 'title='+title+'&user='+user, 
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function (data) {
+                $("#list").trigger("reloadGrid", { fromServer: true, current: true });
+                //alert ("Show Cancelled")
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Request: " + XMLHttpRequest);
+                alert("Status: " + textStatus); 
+                alert("Error: " + errorThrown); 
+            } 
+        });     
+    }      
 
     function demoteEntry(title,user) {
         jQuery.support.cors = true;

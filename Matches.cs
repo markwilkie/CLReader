@@ -92,11 +92,30 @@ namespace CLReader
             return matchDict.Remove(title);
         }
 
+        public void MarkClicked(string titleKey,string user)
+        {
+            //See who it is
+            bool jennieFlag = false;
+            if(user=="Jennie")
+                jennieFlag=true;
+
+            //Get item
+            Item item=GetItem(titleKey);
+
+            //Set appropriate flag
+            if(jennieFlag)
+                item.JennieClicked = true;
+            else
+                item.MarkClicked = true;
+
+            Save();            
+        }
+
         public void PromoteItem(string titleKey,string user)
         {
             //See who it is
             bool jennieFlag = false;
-            if(user=="jennie")
+            if(user=="Jennie")
                 jennieFlag=true;
 
             //Get item
@@ -145,7 +164,7 @@ namespace CLReader
         {
             //See who it is
             bool jennieFlag = false;
-            if(user=="jennie")
+            if(user=="Jennie")
                 jennieFlag=true;
 
             //Get item

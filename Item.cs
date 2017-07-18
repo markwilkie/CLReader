@@ -12,6 +12,8 @@ namespace CLReader
         public string Content { get; set; }
         public string SearchString { get; set; }
         public bool Starred { get; set; }
+        public bool MarkClicked { get; set; }
+        public bool JennieClicked { get; set; }
         public bool MarkBuy { get; set; }
         public bool JennieBuy { get; set; }
         public bool MarkInterested { get; set; }
