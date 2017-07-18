@@ -1,7 +1,11 @@
 
 <h3>Last Scan: @ViewBag.LastScanDate</h3>
 
-<table id="promotedList"><tr><td></td></tr></table> 
+Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(this.value)"> 
+    <option value="" >Please Choose</option>
+    <option value="Mark" >Mark</option>
+    <option value="Jennie" >Jennie</option> 
+ </select><p>
 
 <table id="list"><tr><td></td></tr></table> 
 
@@ -10,13 +14,33 @@
 @section Scripts
 {        
     <script>
+    var user='na';
 
+    //Set current user on load
+    window.onload = function(e)
+    { 
+        user = getParameterByName('user');
+        if(user)
+            document.getElementById("SelectUser").value = user;
+    }
+
+    //Grab parameter from url  
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    };    
+
+    //Sets user on dropdown change
+    function setUser(data) { 
+        user = data;
+    }     
+
+    //Grid itself
     $("#list").jqGrid({
         url: "/api/matches",
         datatype: "JSON",
         mtype: "GET",
         colModel: [
-            { name: "Title", key:true, hidden: true },  
             { name: "Link", hidden: true },        
             { name: "WebSite", hidden: true },   
             { name: "SearchString", hidden: true },    
@@ -24,8 +48,8 @@
             { label: "Publish Date", name: "PublishDate", width: 125,
                 formatter: "date",
                 formatoptions: { srcformat: "ISO8601Long", newformat: "m/d/y h:i A"
-                }},           
-            { name: 'Entry', title: false, width: 700,
+                }},              
+            { name: "Title", key:true, align: "left", width: 700, formatter:'showlink', formatoptions: { baseLinkUrl: 'javascript:', showAction: "openLink('", addParam: "');"},
                 cellattr: function (rowId, cellValue, rowObject, cm, rdata)  {
                     if(rowObject.JennieInterested || rowObject.MarkInterested)
                         return 'style="font-size:125%;" class="ui-state-error-text ui-state-error";"'; 
@@ -33,15 +57,13 @@
                         return 'style="font-size:125%;" class="ui-state-error-text ui-state-highlight";"';                         
                     if(rowObject.Starred)
                         return ' style="font-size:120%"';
-                },            
-                formatter: function (cellvalue, options, rowObject) {
-                    return '<a href="' + rowObject.Link + '">' + rowObject.Title + ' (' + rowObject.WebSite + ': ' + rowObject.SearchString + ')</a>';
-                }},
+                }
+            },         
             { label: "Starred", name: "Starred",  hidden: true },
             { label: "Jen", name: "JennieInterested", width: 60, template: "booleanCheckbox" },
             { label: "Jen Buy", name: "JennieBuy", width: 60, template: "booleanCheckbox" },
             { label: "Mark", name: "MarkInterested", width: 60, template: "booleanCheckbox" },
-            { label: "Mark Buy", name: "MarkBuy", width: 63, template: "booleanCheckbox" }
+            { label: "Mark Buy", name: "MarkBuy", width: 63, template: "booleanCheckbox" },
         ],
         pager: "#pager",
         rowNum: 25,
@@ -51,19 +73,24 @@
         viewrecords: true,
         gridview: true,   
         forceClientSorting: true,  
-        caption: "StreamCapture Schedule",
+        caption: "RV Searcher",
         actionsNavOptions: {
             editbutton: false,
             delbutton: false,
             custom: [
                 { action: "promoteRow", position: "first",
                     onClick: function (options) {
-                        promoteEntry(options.rowid,getParameterByName('user'));
-                        //alert("Post, rowid=" + options.rowid);
+                        if(user)
+                            promoteEntry(options.rowid,user);
+                        else
+                            alert("Please select your name and try again");
                     } },
                 { action: "demoteRow", 
                     onClick: function (options) {
-                        demoteEntry(options.rowid,getParameterByName('user'));                 
+                        if(user)
+                            demoteEntry(options.rowid,user);
+                        else
+                            alert("Please select your name and try again");             
                 } }
             ],
             promoteRowicon: "ui-icon-plus",
@@ -71,7 +98,7 @@
             demoteRow: "Ignore Entry", 
             demoteRowicon: "ui-icon-cancel"      
 }        
-    }).navGrid("#pager", {edit: false, add: false, del: false, search: false, refresh: true, refreshstate: "current",
+    }).navGrid("#pager", {edit: false, add: false, del: false, search: true, refresh: true, refreshstate: "current",
             //beforeRefresh: function(){console.log("beforeRefresh");},
             afterRefresh: function(){refreshEntries()}},
         {}, // settings for edit
@@ -79,6 +106,15 @@
         {}, // settings for delete
         {} // search options
     ).jqGrid("filterToolbar", {searchOnEnter: false, defaultSearch:"cn", ignoreCase:true}); 
+
+    //Used by showlink formatter to open the URL
+    function openLink(id) {
+        var row = id.split("=");
+        var row_ID = row[1];   
+        var url= $("#list").getCell(row_ID, 'Link');
+
+        window.open(url);
+    }    
 
 
     function refreshEntries() {      
@@ -128,11 +164,6 @@
             } 
         }); 
     }
-        
-    function getParameterByName(name) {
-        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-    };
-        
+       
     </script> 
 }  
