@@ -43,8 +43,6 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
         mtype: "GET",
         colModel: [
             { name: "Link", hidden: true },        
-            { name: "WebSite", hidden: true },   
-            { name: "SearchString", hidden: true },    
             { name: "act", template: "actions", align: "left", width: 50 }, 
             { label: "Publish Date", name: "PublishDate", width: 125,
                 formatter: "date",
@@ -72,7 +70,9 @@ Choose Who You Are: <select name="SelectUser" id="SelectUser" onchange="setUser(
                     //classTag=classTag+'"';
                     return styleTag + " " + classTag;
                 }
-            },         
+            },   
+            { label: "Source", name: "WebSite", width: 80 },   
+            { label: "Search", name: "SearchString", width: 175 },                     
             { label: "Starred", name: "Starred", hidden: true },
             { label: "MarkClick", name: "MarkClicked", hidden: true, template: "booleanCheckbox" },            
             { label: "JenClick", name: "JennieClicked", hidden: true, template: "booleanCheckbox" }, 
