@@ -56,8 +56,10 @@ namespace CLReader
 
         public bool AddItem(Item item,Matches lastMatches)
         {
+            //Fix some stuff....
+            item.Title=item.Title.Replace("'","");  //This is weird, but I couln't find a better way to do this
+
             //make sure we don't need to ignore 
-            //string encodedTitle = System.Net.WebUtility.UrlEncode(item.Title);
             string title = item.Title;
 
             if(!currentIgnoreList.Contains(title))
