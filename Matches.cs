@@ -39,6 +39,24 @@ namespace CLReader
 
         public void SaveNewIgnoreList()
         {
+            //Let's make sure every ignore entry is given two attempts to work due to the interwebs being flaky
+            //This way, something has to "miss" twice before falling off
+
+            //First, let's load the existing 2nd chance list
+            string secondChanceFileName="TitlesToIgnore2ndChance.json";
+            List<string> secondChanceList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(secondChanceFileName));
+
+            //Time to compare.  (entries in 2nd chance, but not in newIgnoreList)  In other words, these are the entires which would have fallen off if not not for 2nd chance
+            secondChanceList = secondChanceList.Except(newIgnoreList).ToList();
+
+            //Save 2nd chance as the current (pre add) ignore list.  This way, if the entry is STILL not in the current ignore list next time, it WILL fall off 
+            //In other words, we're serializing something that's different than what'll be in memory.
+            System.IO.File.WriteAllText(secondChanceFileName, JsonConvert.SerializeObject(newIgnoreList, Formatting.Indented));
+
+            //Now let's add current 2nd chance list to the new ignore list
+            newIgnoreList.AddRange(secondChanceList);
+
+            //Save the current title to ignore - which now include 2nd chance....
             string fileName="TitlesToIgnore.json";
             System.IO.File.WriteAllText(fileName, JsonConvert.SerializeObject(newIgnoreList, Formatting.Indented));
         }
