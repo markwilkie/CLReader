@@ -23,12 +23,11 @@
     "EbaySearch": "(eurovan,t4) (camper,westfalia,winnebago) -mv"
   },
   {
-    "MaxPrice": 51500,
+    "MaxPrice": 56500,
     "CLSearch": "(sprinter|freightliner) (camper)",
     "EbaySearch": "(sprinter,freightliner) (camper,pop top,penthouse,conversion) -(conversion package)",
     "RVTraderSearch": "sprinter,freightliner",
-    "RTVSearch": "sprinter,freightliner",
-    "IgnoreZeroPrice": true
+    "RTVSearch": "sprinter,freightliner"
   },
   {
     "CLSearch": "(sportsmobile) (van|camper|rv)",

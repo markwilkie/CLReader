@@ -1,5 +1,21 @@
 {
   "matchDict": {
+    "2015 Ford Transit Conversion Van Explorer Limited SE $35009 ": {
+      "Link": "http://www.ebay.com/itm/2015-Ford-Transit-Conversion-Van-Explorer-Limited-SE-/391843264488?hash=item5b3badb7e8:g:1TQAAOSwfkxZb4WT",
+      "Title": "2015 Ford Transit Conversion Van Explorer Limited SE $35009 ",
+      "Content": "<table border=\"0\" cellpadding=\"8\"><tr><td width=\"80px\"><a href=\"http://www.ebay.com/itm/2015-Ford-Transit-Conversion-Van-Explorer-Limited-SE-/391843264488?hash=item5b3badb7e8:g:1TQAAOSwfkxZb4WT\"><img border=\"0\" src=\"https://i.ebayimg.com/thumbs/images/g/1TQAAOSwfkxZb4WT/s-l225.jpg\"></a></td><td><div><span><strong>$35,009.00</strong></span> (5 Bids)</div><div>End Date: <span>Jul-26 09:15</span></div><a href=\"http://www.ebay.com/itm/2015-Ford-Transit-Conversion-Van-Explorer-Limited-SE-/391843264488?hash=item5b3badb7e8:g:1TQAAOSwfkxZb4WT\">Bid now</a><span>  |  </span><a href=\"http://cgi1.ebay.com/ws/eBayISAPI.dll?MfcISAPICommand=MakeTrack&item=391843264488&ssPageName=RSS:B:SHOP:US:104\">Add to watch list</a></td></tr></table>",
+      "SearchString": "(promaster,transit) (camper,pop top,penthouse,conversion)",
+      "Starred": true,
+      "MarkClicked": true,
+      "JennieClicked": false,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": false,
+      "JennieInterested": false,
+      "WebSite": "Ebay",
+      "PublishDate": "2017-07-19T09:15:12-07:00",
+      "FeedType": 0
+    },
     "2015 Custom OTHER in Destin, FL $39,500 10,900 miles ": {
       "Link": "https://www.rvtrader.com/listing/2015-Custom-OTHER-122207426",
       "Title": "2015 Custom OTHER in Destin, FL $39,500 10,900 miles ",
@@ -14,22 +30,6 @@
       "JennieInterested": false,
       "WebSite": "RVTrader",
       "PublishDate": "2017-06-04T00:00:00",
-      "FeedType": 0
-    },
-    "2017 Winnebago FUSE 423T in Bristol, CT $78,995 2,800 miles ": {
-      "Link": "https://www.rvtrader.com/dealers/Crowley-RV-Center-2921114/listing/2017-Winnebago-FUSE-423T-119021057",
-      "Title": "2017 Winnebago FUSE 423T in Bristol, CT $78,995 2,800 miles ",
-      "Content": "",
-      "SearchString": "transit",
-      "Starred": true,
-      "MarkClicked": false,
-      "JennieClicked": false,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": false,
-      "JennieInterested": false,
-      "WebSite": "RVTrader",
-      "PublishDate": "2016-07-27T00:00:00",
       "FeedType": 0
     },
     "2001 eurovan winniebago great camper $35000": {
@@ -80,6 +80,22 @@
       "PublishDate": "2017-06-24T16:29:20-07:00",
       "FeedType": 1
     },
+    "2007 Sprinter converted Camper Van $55000": {
+      "Link": "http://denver.craigslist.org/rvs/6217050837.html",
+      "Title": "2007 Sprinter converted Camper Van $55000",
+      "Content": "2007 sprinter \nTrailer breaks w/trailer system \n170\" wheelbase \nToyo tires on xo chrome wheels \nRoof auxiliary ac \nKen wood DVD stereo with xm, and 2 auxiliary monitors \n3.0 turbo diesel \nFactory buckets and removable back seat with integrated seat b [...]",
+      "SearchString": "(sprinter|freightliner) (camper)",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": true,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": true,
+      "JennieInterested": false,
+      "WebSite": "CraigsList",
+      "PublishDate": "2017-07-12T18:42:27-07:00",
+      "FeedType": 1
+    },
     "2015 Mercedes-Benz Sprinter 170\" High-Roof Custom Camper (Newport Beach) $49999": {
       "Link": "http://orangecounty.craigslist.org/cto/6227625942.html",
       "Title": "2015 Mercedes-Benz Sprinter 170\" High-Roof Custom Camper (Newport Beach) $49999",
@@ -87,7 +103,7 @@
       "SearchString": "(sprinter|freightliner) (camper)",
       "Starred": false,
       "MarkClicked": true,
-      "JennieClicked": false,
+      "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
       "MarkInterested": false,
@@ -103,7 +119,7 @@
       "SearchString": "(sprinter|freightliner) (camper)",
       "Starred": false,
       "MarkClicked": true,
-      "JennieClicked": false,
+      "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
       "MarkInterested": false,
@@ -119,7 +135,7 @@
       "SearchString": "(sprinter|freightliner) (camper)",
       "Starred": false,
       "MarkClicked": true,
-      "JennieClicked": false,
+      "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
       "MarkInterested": true,
@@ -144,10 +160,26 @@
       "PublishDate": "2017-07-19T18:17:52-07:00",
       "FeedType": 1
     },
-    "Adventure Camper Van AWD (West Seattle) $8500": {
-      "Link": "http://seattle.craigslist.org/see/cto/6185178890.html",
-      "Title": "Adventure Camper Van AWD (West Seattle) $8500",
-      "Content": "Tired of a wet tent? Wanna be able to roll out late on a Friday, park at the trail head/put in/sick downhill course/parking lot for fresh tracks/Smith rock or my personal favorites, a paragliding launch or kitesurf beach!? If I needed just a fun rig  [...]",
+    "Sprinter van rv conversion (Anacortes) $30000": {
+      "Link": "http://seattle.craigslist.org/see/rvs/6228234700.html",
+      "Title": "Sprinter van rv conversion (Anacortes) $30000",
+      "Content": "2005 sprinter with the half a million mile turbo diesel t1n engine and no egr system to go out (this is the sprinter you can take to South America) low miles at 145000 and runs like a top. 140 wheelbase high top. It has brand new BFg k02 all terrain  [...]",
+      "SearchString": "(sprinter|freightliner) (camper)",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": true,
+      "MarkBuy": true,
+      "JennieBuy": false,
+      "MarkInterested": false,
+      "JennieInterested": false,
+      "WebSite": "CraigsList",
+      "PublishDate": "2017-07-20T11:37:50-07:00",
+      "FeedType": 1
+    },
+    "Sprinter camper": {
+      "Link": "http://seattle.craigslist.org/see/cto/6205987133.html",
+      "Title": "Sprinter camper",
+      "Content": "Live the van life. Super clean sprinter with camper build out. Wood floor, Tongue and groove walls, fully insulated, sink, stove, second battery, solar panels, water tank etc. Open floor Plan keeps it feeling roomy. Get on the road today. 158\" Wheelb [...]",
       "SearchString": "(sprinter|freightliner) (camper)",
       "Starred": false,
       "MarkClicked": true,
@@ -157,7 +189,7 @@
       "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "CraigsList",
-      "PublishDate": "2017-06-20T10:45:36-07:00",
+      "PublishDate": "2017-07-05T12:47:19-07:00",
       "FeedType": 1
     },
     "2006 Mercedes/Dodge 2500 Sprinter - converted to RV (santa cruz) $35000": {
@@ -183,7 +215,7 @@
       "SearchString": "sprinter",
       "Starred": false,
       "MarkClicked": true,
-      "JennieClicked": false,
+      "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
       "MarkInterested": true,
@@ -234,7 +266,23 @@
       "JennieClicked": false,
       "MarkBuy": false,
       "JennieBuy": false,
-      "MarkInterested": true,
+      "MarkInterested": false,
+      "JennieInterested": false,
+      "WebSite": "RVTrader",
+      "PublishDate": "2017-07-13T00:00:00",
+      "FeedType": 0
+    },
+    "2009 Era Motor Homes OTHER in Sherman, TX $52,000 ": {
+      "Link": "https://www.rvtrader.com/listing/2009-Era-Motor-Homes-OTHER-122606181",
+      "Title": "2009 Era Motor Homes OTHER in Sherman, TX $52,000 ",
+      "Content": "",
+      "SearchString": "sprinter",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": false,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "RVTrader",
       "PublishDate": "2017-07-13T00:00:00",
@@ -254,6 +302,22 @@
       "JennieInterested": false,
       "WebSite": "RVTrader",
       "PublishDate": "2017-07-02T00:00:00",
+      "FeedType": 0
+    },
+    "2006 Leisure Travel FREE SPIRIT 210 B LSS in Albuquerque, NM $54,900 92,000 miles ": {
+      "Link": "https://www.rvtrader.com/listing/2006-Leisure-Travel-FREE-SPIRIT-210-B-LSS-122350356",
+      "Title": "2006 Leisure Travel FREE SPIRIT 210 B LSS in Albuquerque, NM $54,900 92,000 miles ",
+      "Content": "",
+      "SearchString": "sprinter",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": true,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": true,
+      "JennieInterested": false,
+      "WebSite": "RVTrader",
+      "PublishDate": "2017-06-17T00:00:00",
       "FeedType": 0
     },
     "2005 Leisure Travel FREE SPIRIT 210 B in Chesapeake, VA $44,498 109,341 miles ": {
@@ -304,6 +368,22 @@
       "PublishDate": "2017-03-10T00:00:00",
       "FeedType": 0
     },
+    "2010 Winnebago ERA in Coburg, OR $54,995 48,488 miles ": {
+      "Link": "https://www.rvtrader.com/dealers/Trades-OK-Inc.-2972666/listing/2010-Winnebago-ERA-120564652",
+      "Title": "2010 Winnebago ERA in Coburg, OR $54,995 48,488 miles ",
+      "Content": "",
+      "SearchString": "sprinter",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": false,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": false,
+      "JennieInterested": false,
+      "WebSite": "RVTrader",
+      "PublishDate": "2016-12-23T00:00:00",
+      "FeedType": 0
+    },
     "2005 Airstream Interstate in Gainesville, FL $49,950 52,665 miles ": {
       "Link": "https://www.rvtrader.com/dealers/Sunshine-State-RVs-2926920/listing/2005-Airstream-Interstate-119931594",
       "Title": "2005 Airstream Interstate in Gainesville, FL $49,950 52,665 miles ",
@@ -345,9 +425,9 @@
       "MarkClicked": true,
       "JennieClicked": true,
       "MarkBuy": false,
-      "JennieBuy": false,
+      "JennieBuy": true,
       "MarkInterested": false,
-      "JennieInterested": true,
+      "JennieInterested": false,
       "WebSite": "CraigsList",
       "PublishDate": "2017-06-10T08:11:14-07:00",
       "FeedType": 1
@@ -432,22 +512,6 @@
       "PublishDate": "2017-07-18T05:34:12-07:00",
       "FeedType": 1
     },
-    "AWD GMC Safari camper conversion (Loveland CO) $26000": {
-      "Link": "http://denver.craigslist.org/cto/6185299946.html",
-      "Title": "AWD GMC Safari camper conversion (Loveland CO) $26000",
-      "Content": "Awd gmc safari lifted new tires and wheels Colorado Camper Van Poptop. \nThe Van is equipped with all wheel drive, power windows and locks, 4.3 liter v6 and a 4 speed automatic overdrive transmission. \n3\" lift and new blackout steel wheels and BFG AT  [...]",
-      "SearchString": "(\"pop top\" | penthouse) (camper | van)",
-      "Starred": true,
-      "MarkClicked": true,
-      "JennieClicked": true,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": true,
-      "JennieInterested": false,
-      "WebSite": "CraigsList",
-      "PublishDate": "2017-06-20T11:57:01-07:00",
-      "FeedType": 1
-    },
     "2013 pleasure way traverse campervan bodyman special (Phoenix az) $10000": {
       "Link": "http://phoenix.craigslist.org/wvl/rvs/6155998401.html",
       "Title": "2013 pleasure way traverse campervan bodyman special (Phoenix az) $10000",
@@ -462,22 +526,6 @@
       "JennieInterested": false,
       "WebSite": "CraigsList",
       "PublishDate": "2017-06-28T12:29:16-07:00",
-      "FeedType": 1
-    },
-    "13,000 miles 2003 Volkswagen Eurovan (Vista) $27000": {
-      "Link": "http://sandiego.craigslist.org/nsd/cto/6214925455.html",
-      "Title": "13,000 miles 2003 Volkswagen Eurovan (Vista) $27000",
-      "Content": "This 2003 Volkswagen Eurovan Weekender is the last model available to the USA. \nIt is perfect for your camping adventures. All the work has been done for you. \n*ONLY 13K miles on a completely rebuilt 2.8 liter V6 engine (REBUILT at 137K miles). \n*4 s [...]",
-      "SearchString": "(\"pop top\" | penthouse) (camper | van)",
-      "Starred": true,
-      "MarkClicked": true,
-      "JennieClicked": false,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": true,
-      "JennieInterested": false,
-      "WebSite": "CraigsList",
-      "PublishDate": "2017-07-11T11:49:44-07:00",
       "FeedType": 1
     },
     "2007 Pleasure Way Plateau TS Dodge (Pahrump, NV) $50000": {
@@ -576,36 +624,20 @@
       "PublishDate": "2017-06-07T00:00:00",
       "FeedType": 0
     },
-    "2001 VW Eurovan Camper 63,000 miles! (NE Alberta St) $48000": {
-      "Link": "http://portland.craigslist.org/mlt/cto/6226667231.html",
-      "Title": "2001 VW Eurovan Camper 63,000 miles! (NE Alberta St) $48000",
-      "Content": "This vehicle is in unbelievable condition inside and out; it would be difficult to find a cleaner, lower milage, and better cared for Eurovan Camper than this! This van has a history of very conscientious owners who have treated it extremely well and [...]",
+    "2009 Class B, FSC, Majestic Leisure-Craft Tourer II, Motorhome, Nice! (OC Area) $38500": {
+      "Link": "http://portland.craigslist.org/clc/rvs/6228261618.html",
+      "Title": "2009 Class B, FSC, Majestic Leisure-Craft Tourer II, Motorhome, Nice! (OC Area) $38500",
+      "Content": "For Sale is my 2009 Majestic Leisure-Craft, 19.6 Ft., Class B, Fully Self-contained, Motorhome. This is easy to handle and drives like a regular size Van. It is not one of those \"BIG BOAT RV's\" that makes you nervous to maneuver and you can't drive o [...]",
       "SearchString": "(camper | \"class b\") van",
       "Starred": false,
       "MarkClicked": true,
-      "JennieClicked": false,
+      "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
       "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "CraigsList",
-      "PublishDate": "2017-07-19T10:40:06-07:00",
-      "FeedType": 1
-    },
-    "2003 Roadtrek 190 Versatile Class B Van conversion (Mcminnville) $35900": {
-      "Link": "http://portland.craigslist.org/yam/rvd/6216091613.html",
-      "Title": "2003 Roadtrek 190 Versatile Class B Van conversion (Mcminnville) $35900",
-      "Content": "2003 Roadtrek 190 Versatile $35,900 \nNice and clean locally owned \nChevy chassis \nSwivel captains seats for extra seating \nOnan generator \nPlus so much more! \nPlease contact us for any further information \nThis RV comes with a 1 year warranty include [...]",
-      "SearchString": "(camper | \"class b\") van",
-      "Starred": false,
-      "MarkClicked": true,
-      "JennieClicked": false,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": false,
-      "JennieInterested": false,
-      "WebSite": "CraigsList",
-      "PublishDate": "2017-07-12T08:01:04-07:00",
+      "PublishDate": "2017-07-20T12:01:23-07:00",
       "FeedType": 1
     },
     "2015 Ford VAN in Seal Beach, CA $27,500 44,000 miles ": {
@@ -688,22 +720,6 @@
       "PublishDate": "2017-07-09T00:00:00",
       "FeedType": 0
     },
-    "2002 Roadtrek 190 POPULAR in Coburg, OR $29,995 64,883 miles ": {
-      "Link": "https://www.rvtrader.com/dealers/Trades-OK-Inc.-2972666/listing/2002-Roadtrek-190-POPULAR-122437246",
-      "Title": "2002 Roadtrek 190 POPULAR in Coburg, OR $29,995 64,883 miles ",
-      "Content": "",
-      "SearchString": "van",
-      "Starred": false,
-      "MarkClicked": true,
-      "JennieClicked": false,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": false,
-      "JennieInterested": false,
-      "WebSite": "RVTrader",
-      "PublishDate": "2017-06-26T00:00:00",
-      "FeedType": 0
-    },
     "2003 Leisure Travel Vans Leisure Travel 210A in Pataskala, OH $37,995 78,302 miles ": {
       "Link": "https://www.rvtrader.com/dealers/RCD-Sales-Company-LTD---Pataskala-719485/listing/2003-Leisure-Travel-Vans-Leisure-Travel-210A-122414823",
       "Title": "2003 Leisure Travel Vans Leisure Travel 210A in Pataskala, OH $37,995 78,302 miles ",
@@ -720,22 +736,6 @@
       "PublishDate": "2017-06-23T00:00:00",
       "FeedType": 0
     },
-    "2006 Roadtrek RS -ADVENTUROUS $32,900 ": {
-      "Link": "http://www.rvt.com/Roadtrek-RS-ADVENTUROUS-2006-Tucson-AZ-ID7594589-UX213820",
-      "Title": "2006 Roadtrek RS -ADVENTUROUS $32,900 ",
-      "Content": "",
-      "SearchString": "van",
-      "Starred": false,
-      "MarkClicked": true,
-      "JennieClicked": false,
-      "MarkBuy": false,
-      "JennieBuy": false,
-      "MarkInterested": false,
-      "JennieInterested": false,
-      "WebSite": "RTV",
-      "PublishDate": "2017-07-19T23:49:51.9552017-07:00",
-      "FeedType": 0
-    },
     "2005 Pleasure-Way Plateau TD $45,750 ": {
       "Link": "http://www.rvt.com/PleasureWay-Plateau-TD-2005-Nashville-TN-ID7590793-UX235086",
       "Title": "2005 Pleasure-Way Plateau TD $45,750 ",
@@ -746,10 +746,26 @@
       "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
-      "MarkInterested": true,
+      "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "RTV",
       "PublishDate": "2017-07-17T11:14:31.5744715-07:00",
+      "FeedType": 0
+    },
+    "2006 Roadtrek RS ADVENTUROUS $32,900 ": {
+      "Link": "http://www.rvt.com/Roadtrek-RS-ADVENTUROUS-2006-Tucson-AZ-ID7594589-UX213820",
+      "Title": "2006 Roadtrek RS ADVENTUROUS $32,900 ",
+      "Content": "",
+      "SearchString": "van",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": true,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": false,
+      "JennieInterested": false,
+      "WebSite": "RTV",
+      "PublishDate": "2017-07-20T08:38:23.0699237-07:00",
       "FeedType": 0
     },
     "2004 GTRV Westy V-TOP $32,900 ": {
@@ -778,7 +794,7 @@
       "JennieClicked": true,
       "MarkBuy": false,
       "JennieBuy": false,
-      "MarkInterested": true,
+      "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "RTV",
       "PublishDate": "2017-07-16T21:41:55.8990941-07:00",
@@ -816,6 +832,22 @@
       "PublishDate": "2017-07-16T21:41:55.9008962-07:00",
       "FeedType": 0
     },
+    "2008 Ford RB E250 5.4L V-8": {
+      "Link": "http://sportsmobile.com/inventory/cars-for-sale/2008-ford-rb-e250-5-4l-v-8/",
+      "Title": "2008 Ford RB E250 5.4L V-8",
+      "Content": "",
+      "SearchString": "ALL",
+      "Starred": false,
+      "MarkClicked": true,
+      "JennieClicked": true,
+      "MarkBuy": false,
+      "JennieBuy": false,
+      "MarkInterested": false,
+      "JennieInterested": true,
+      "WebSite": "SportsMobile",
+      "PublishDate": "2017-07-20T12:41:42.2258881-07:00",
+      "FeedType": 0
+    },
     "2006 Dodge 2500 Sprinter RB $42,800": {
       "Link": "http://sportsmobile.com/inventory/cars-for-sale/2006-dodge-2500-sprinter-rb/",
       "Title": "2006 Dodge 2500 Sprinter RB $42,800",
@@ -824,9 +856,9 @@
       "Starred": false,
       "MarkClicked": true,
       "JennieClicked": true,
-      "MarkBuy": false,
+      "MarkBuy": true,
       "JennieBuy": false,
-      "MarkInterested": true,
+      "MarkInterested": false,
       "JennieInterested": false,
       "WebSite": "SportsMobile",
       "PublishDate": "2017-07-16T18:53:53.0101877-07:00",
@@ -849,5 +881,5 @@
       "FeedType": 0
     }
   },
-  "LastScanDate": "2017-07-20T05:49:59.0692651-07:00"
+  "LastScanDate": "2017-07-21T06:24:35.5856155-07:00"
 }
