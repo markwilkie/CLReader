@@ -1,29 +1,12 @@
 [
   {
-    "MinPrice": 0,
-    "MaxPrice": 150000,
-    "CLSearch": "(t5|t6) (california|camper|westfalia) -volvo -subaru -mercedes",
-    "Starred": true
-  },
-  {
-    "MaxPrice": 81000,
     "CLSearch": "(promaster|transit|nissan nv) (camper)",
     "RVTraderSearch": "promaster,transit,nissan nv",
     "EbaySearch": "(promaster,transit) (camper,pop top,penthouse,conversion)",
     "RTVSearch": "promaster,transit",
-    "Starred": true,
     "IgnoreZeroPrice": true
   },
   {
-    "MinPrice": 11500,
-    "MaxPrice": 36500,
-    "MinYear": 2001,
-    "CLSearch": "(eurovan|t4) (camper|winnebago|westfalia) -mv",
-    "SambaSearch": "winnebago westfalia camper",
-    "EbaySearch": "(eurovan,t4) (camper,westfalia,winnebago) -mv"
-  },
-  {
-    "MaxPrice": 56500,
     "CLSearch": "(sprinter|freightliner) (camper)",
     "EbaySearch": "(sprinter,freightliner) (camper,pop top,penthouse,conversion) -(conversion package)",
     "RVTraderSearch": "sprinter,freightliner",
@@ -31,30 +14,49 @@
   },
   {
     "CLSearch": "(sportsmobile) (van|camper|rv)",
-    "IgnoreZeroPrice": true, 
-    "Starred": true
+    "RVTraderSearch": "sportsmobile",
+    "RTVSearch": "sportsmobile"
   },
   {
-    "CLSearch": "(\"pop top\" | penthouse) (camper | van)",
-    "Starred": true
+    "CLSearch": "\"van specialties\"",
+    "RVTraderSearch": "\"van specialties\"",
+    "RTVSearch": "\"van specialties\""
   },
   {
-    "CLSearch": "\"pleasure way\" plateau",
-    "IgnoreZeroPrice": true
+    "CLSearch": "\"outside van\"",
+    "RVTraderSearch": "\"outside van\"",
+    "RTVSearch": "\"outside van\""
+  },
+  {
+    "CLSearch": "\"morehead design\"",
+    "RVTraderSearch": "\"morehead design\"",
+    "RTVSearch": "\"morehead design\""
+  },
+  {
+    "CLSearch": "(\"pop top\" | penthouse) (camper | van)"
+  },
+  {
+    "CLSearch": "(\"pleasure way\" | pleasureway | pleasure-way) (plateau | Ascent)",
+    "RVTraderSearch": "plateau",
+    "RTVSearch": "plateau"
   },
   {
     "CLSearch": "\"leisure travel\" \"free spirit\"",
-    "IgnoreZeroPrice": true    
+    "RVTraderSearch": "\"leisure travel\" \"free spirit\"",
+    "RTVSearch": "\"leisure travel\" \"free spirit\""
   },
   {
-    "CLSearch": "roadtrek (agile|adventurous|e-trek|zion)",
-    "IgnoreZeroPrice": true    
+    "CLSearch": "roadtrek (agile|adventurous|e-trek|zion)"  
   },
   {
-    "MaxPrice": 51500,    
-    "CLSearch": "airstream interstate",
+    "CLSearch": "\"great west vans\"",
+    "RVTraderSearch": "\"great west vans\"",
+    "RTVSearch": "\"great west vans\""   
+  },
+  {  
+    "CLSearch": "airstream (interstate | parkway)",
     "RVTraderSearch": "airstream interstate",
-    "IgnoreZeroPrice": true    
+    "RTVSearch": "airstream interstate"  
   },
   {
     "CLSearch": "(camper | \"class b\") van",

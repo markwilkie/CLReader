@@ -1,12 +1,12 @@
 {
-  "MinPrice": 6000,
-  "MaxPrice": 51110,
+  "MinPrice": 12000,
+  "MaxPrice": 61500,
   "MinYear": 2001,
   "MaxYear": 3000,
   "CLSearch": null,
   "SambaSearch": null,
-  "ExcludeChars": "wheelchair,mobility,denali,extended,jeep,searching,wanted,consign,utility,truck,delivery,handicap,flatbed,cargo,looking,wtb,vintage,chinook,barter,buying,search,wanted,antique,cruiser,5th,keystone,trailer,slide,b+,b +,b plus,rialta,navion,f150,f-150,f 150,f250,f 250,f-250,f-350,f-450,f450,s10,xlt,silverado,lariat,class c,class a,widebody,wide body,weekender,passenger",
-  "ExcludeKeywords": "tacoma,sierra,cash for,cab,cube,crew,bus,box,trade,coach,shop",
+  "ExcludeChars": "coach,wheelchair,mobility,denali,jeep,searching,wanted,consign,utility,truck,delivery,handicap,flatbed,looking,wtb,vintage,chinook,barter,buying,search,wanted,antique,cruiser,5th,keystone,trailer,slide,class b+,rialta,navion,f150,f-150,f 150,f250,f 250,f-250,f-350,f-450,f450,s10,xlt,silverado,lariat,class c,class a,widebody,wide body,weekender,passenger",
+  "ExcludeKeywords": "tacoma,sierra,cash for,cab,cube,crew,bus,box,trade,shop,kodiak,parts,cargo",
   "USCities": "atlanta,austin,boston,chicago,dallas,denver,detroit,houston,lasvegas,losangeles,miami,minneapolis,newyork,orangecounty,philadelphia,phoenix,portland,raleigh,sacramento,sandiego,seattle,sfbay,washingtondc",
   "CACities": "vancouver,victoria"
 }
