@@ -1,68 +1,26 @@
 [
   {
-    "CLSearch": "(promaster|transit|nissan nv) (camper)",
-    "RVTraderSearch": "promaster,transit,nissan nv",
-    "EbaySearch": "(promaster,transit) (camper,pop top,penthouse,conversion)",
-    "RTVSearch": "promaster,transit",
-    "IgnoreZeroPrice": true
+    "CLSearch": "*c-dory* | c dory",
+    "IgnoreZeroPrice": false
   },
   {
-    "CLSearch": "(sprinter|freightliner) (camper)",
-    "EbaySearch": "(sprinter,freightliner) (camper,pop top,penthouse,conversion) -(conversion package)",
-    "RVTraderSearch": "sprinter,freightliner",
-    "RTVSearch": "sprinter,freightliner"
+    "CLSearch": "pilothouse | pilot house",
+    "IgnoreZeroPrice": false
   },
   {
-    "CLSearch": "(sportsmobile) (van|camper|rv)",
-    "RVTraderSearch": "sportsmobile",
-    "RTVSearch": "sportsmobile"
+    "CLSearch": "skagit | orca | seasport | glacier | rosborough | davis",
+    "IgnoreZeroPrice": false
   },
   {
-    "CLSearch": "\"van specialties\"",
-    "RVTraderSearch": "\"van specialties\"",
-    "RTVSearch": "\"van specialties\""
+    "CLSearch": "ranger (tug|tugs) (r-23|r23|r 23|23)",
+    "IgnoreZeroPrice": false
   },
   {
-    "CLSearch": "\"outside van\"",
-    "RVTraderSearch": "\"outside van\"",
-    "RTVSearch": "\"outside van\""
+    "CLSearch": "nordic (tug|tugs)",
+    "IgnoreZeroPrice": false
   },
   {
-    "CLSearch": "\"morehead design\"",
-    "RVTraderSearch": "\"morehead design\"",
-    "RTVSearch": "\"morehead design\""
-  },
-  {
-    "CLSearch": "(\"pop top\" | penthouse) (camper | van)"
-  },
-  {
-    "CLSearch": "(\"pleasure way\" | pleasureway | pleasure-way) (plateau | Ascent)",
-    "RVTraderSearch": "plateau",
-    "RTVSearch": "plateau"
-  },
-  {
-    "CLSearch": "\"leisure travel\" \"free spirit\"",
-    "RVTraderSearch": "\"leisure travel\" \"free spirit\"",
-    "RTVSearch": "\"leisure travel\" \"free spirit\""
-  },
-  {
-    "CLSearch": "roadtrek (agile|adventurous|e-trek|zion)"  
-  },
-  {
-    "CLSearch": "\"great west vans\"",
-    "RVTraderSearch": "\"great west vans\"",
-    "RTVSearch": "\"great west vans\""   
-  },
-  {  
-    "CLSearch": "airstream (interstate | parkway)",
-    "RVTraderSearch": "airstream interstate",
-    "RTVSearch": "airstream interstate"  
-  },
-  {
-    "CLSearch": "(camper | \"class b\") van",
-    "RVTraderSearch": "van",
-    "RTVSearch": "van",
-    "SportsMobileSearch": "ALL",
-    "EbaySearch": "(camper,\"class b\") (van, conversion, gtrv)"
+    "CLSearch": "osprey 22",
+    "IgnoreZeroPrice": false
   }
 ]

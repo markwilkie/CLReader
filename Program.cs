@@ -47,9 +47,9 @@ namespace CLReader
 
                         //Search all US and CA cities asked for
                         if(st.USCities != null && st.USCities.Length>0)
-                            RSSScraper.SearchCL(st,st.USCities,".org",contextBag.Matches,lastMatches);
+                            CLScraper.Scrape(st,st.USCities,".org",contextBag.Matches,lastMatches);
                         if(st.CACities != null && st.CACities.Length>0)
-                            RSSScraper.SearchCL(st,st.CACities,".ca",contextBag.Matches,lastMatches);
+                            CLScraper.Scrape(st,st.CACities,".ca",contextBag.Matches,lastMatches);
                     }
 
                     //Samba??
@@ -70,7 +70,7 @@ namespace CLReader
                     if(st.RVTraderSearch != null)
                     {
                         Console.WriteLine($"RVTrader: Price: {st.MinPrice}-{st.MaxPrice} Years: {st.MinYear}-{st.MaxYear} Search: {st.RVTraderSearch}");                        
-                        RVTraderScraper.Scrape(st,contextBag.Matches,lastMatches);
+                        //RVTraderScraper.Scrape(st,contextBag.Matches,lastMatches);
                     }
 
                     //RTV
@@ -102,9 +102,10 @@ namespace CLReader
                 int hoursToWait = 2;
                 if(DateTime.Now.Hour >= 22)
                     hoursToWait = 6;
-                Console.WriteLine($"{DateTime.Now}: Waiting {hoursToWait} hours....");
                 TimeSpan timeToWait = new TimeSpan(hoursToWait,0,0);
+                Console.WriteLine($"{DateTime.Now}: Waiting {hoursToWait} hours....");
                 Thread.Sleep(timeToWait);
+                Console.WriteLine($"{DateTime.Now}: ok.....done with sleeping...");
             }
         }
 

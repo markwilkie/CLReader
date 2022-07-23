@@ -25,7 +25,6 @@ namespace CLReaderWeb
             app.UseStaticFiles();
             app.UseMvc();
 
-
             //if all else fails
             app.Run(async context => 
             {
